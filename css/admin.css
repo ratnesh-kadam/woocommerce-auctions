@@ -1,0 +1,56 @@
+/* CSS for timepicker */
+.post-type-product .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.post-type-product .ui-timepicker-div dl { text-align: left; }
+.post-type-product .ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.post-type-product .ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.post-type-product .ui-timepicker-div td { font-size: 90%; }
+.post-type-product .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+.post-type-product .ui-timepicker-rtl{ direction: rtl; }
+.post-type-product .ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.post-type-product .ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.post-type-product .ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+table.wp-list-table .column-auction {width:46px; text-align: center;}
+table.wp-list-table td.column-auction img{padding: 0.2em;border-radius: 50%;}
+table.wp-list-table td.column-auction img{background-color:#73a724}
+table.wp-list-table .column-auction img.finished{background-color: #de9e0c;}
+table.wp-list-table .column-auction img.fail{background-color: #d54e21;}
+table.wp-list-table .column-auction img.payed {background-color: #21759b;}
+table.wp-list-table .column-auction img.order {background-color: transparent;-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0,0,0,.08);box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0,0,0,.08); border:1px solid #cccccc; padding:0.3em}
+.auction-table {width: 100%}
+.reminder-status .error{color:#B81C23}
+.reminder-status .ok{color:#85AD74}
+.woocommerce ul.wc-tabs li.auction_tab a:before,  #woocommerce-product-data ul.wc-tabs li.auction_tab a:before{display: none;} 
+.auction-table .actions {width:50px; text-align: center;}
+.auction-table tr.deleted{background: #bd393a;}
+.auction-table tr:hover{background: rgba(0,0,0,0.2)}
+
+.icon-woo-auction{background: url(../images/auction.png) center no-repeat;}
+
+
+.auction_tab_options a:before {background: url(../images/auction_admin.png) center no-repeat; display: inline-block !important; width: 15px; height: 15px; content: ' ' !important;}
+
+.auction_tab_options.active a:before {background: url(../images/auction_admin_active.png) center no-repeat;}
+
+.woocommerce_options_panel #_auction_dates_to,.woocommerce_options_panel #_relist_auction_dates_to {clear: left; margin-top: 10px;} 
+
+.woocommerce_options_panel .auction_dates_fields img:last-of-type, .woocommerce_options_panel .relist_dates_fields img:last-of-type{margin-top: 14px;}
+
+
+.user-filter{margin-left:1em}
+.user-filter:before{content: "\f504";
+font-family: dashicons;
+font-size: 1em !important; }
+
+.relist_auction_dates_fields {display:none;}
+
+.auction-table .action a.disabled{cursor: wait;}
+
+table.wp-list-table span.product-type.auction:before{
+    font-family: Dashicons;
+    content: "";
+    background: url(../images/auction_admin_active.png) center no-repeat;
+}
+.column-product_type {position: relative}
+.auction-status  {background-color: #7ad03a; width: 0.5em; height: 0.5em; border-radius: 50%; display: inline-block; position: absolute; left: 6px; top: 4px; }
+.auction-status.finished  {background-color: #de9e0c;}
+.auction-status.fail  {background-color: #d54e21;}

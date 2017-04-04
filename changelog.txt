@@ -1,0 +1,312 @@
+** Version 1.2.7 **
+	- Fix: Problem with ajax checking for bids
+	- Fix: Proxy bidding bug
+
+** Version 1.2.6 **
+	- Fix: WooCommerce > 3.0.0 compatibility
+	- Fix: WP SEO
+	- Fix: Limiting default maximum value for single bid to 999999999999.99 because of php float limitation
+	- Add: Added new filters and hooks
+	
+** Version 1.2.5 **
+	- Add: Filter simple_auction_type
+	- Add: Small modifications in admin interface
+	- Fix: Bug in checking if auctions is on user watchlist
+	- Fix: Bug in dropdown sorting menu showing auction sort options on shop page when mixing of regular products and auctions is not enabled
+
+** Version 1.2.4 **
+	- Fix: Bug when bid value has more than 2 decimals
+	- Fix: Typos
+	- Fix: Winning badge removing with ajax
+	- Fix: Checkout bug when "Allow Buy It Now after bidding has started" option is turned off
+	- Fix: Bug with auction activity page 
+
+** Version 1.2.3 **
+	- Fix: Bug when sending finished mail notification to admin after auction has failed
+	- Fix: Issue with page title on auction base page
+	- Fix: Issue with wpml language switcher
+	- Add: Option to hide buy now button after first bid was placed
+	- Add: Option to have start price (min/max) for sealed bid auctions
+	
+** Version 1.2.2 **
+	- Fix: Bug with showing auctions when "Shop Page Display: Show categories" is selected 
+	- Fix: Sorting select dropdown bug
+
+** Version 1.2.1 **
+	- Fix: Bug when saving auction
+
+** Version 1.2 **
+	+ Add: Ability to create Sealed Bid (silent) Auctions
+	+ Add: Better auction sorting feature (available in WordPress 4.2 and higher)
+	+ Add: Ajax now refreshing Auction History tab on single product page
+	+ Add: New shortcode [past_auctions]
+	- Fix: Recently viewed auctions widget bug
+	- Fix: Future auctions widget title bug
+	- Fix: Bug with Wp_Meta_Query
+	- Fix: unnecessary email notification when user outbid itself
+
+** Version 1.1.38 **
+	- Fix: Proxy auctions - new max bid cannot be smaller than old max bid
+	+ Add: Disable / enable sending customer "bid notification" email for proxy (auto) bidding
+	- Fix: Pagination bug on archive page
+
+** Version 1.1.37 **
+	- Fix: Language issues and typos
+	- Fix: Bug fixes for shortcodes auctions_watchlist, my_auctions_activity, woocommerce_simple_auctions_my_auctions
+	- Fix: Paging bug when auction base page is home page
+	- Fix: Added function wc_get_price_decimals() for support wcommerce 2.1.x and 2.2.x  versions
+
+** Version 1.1.36 **
+	- Fix: Bug with limiting maximum value for single bid
+
+** Version 1.1.35 **
+	- Fix: Problem with fatal error on plugin activation
+
+** Version 1.1.34 **
+	- Fix: Database problem for long bid values
+ 	- Fix: Auction filtering bug in wp-admin
+ 	- Fix: Sale badge not showing after updating max price
+ 	+ Add: Option to limit maximum value for single bid
+
+** Version 1.1.33 **
+	- Fix: Deleting bids in admin
+	- Fix: Fixed double quote in class-wc-product-auction.php, again :(
+	+ Add: Removing reserve price after auction is closed
+
+** Version 1.1.32 **
+	- Fix: Ignore cron relist message bug
+	- Fix: Fixed double quote in class-wc-product-auction.php
+	+ Add: Watchlist feature, shortcode [auctions_watchlist], widget
+	+ Add: [my_auctions_activity] shortcode
+
+** Version 1.1.31 **
+	- Fix: Removed auction history and relist metaboxes for non auction products
+	- Fix: Ajax refresh reserve met text
+	+ Add: Added {current_bidder} tag to bid email notification to admin when user(s) place a bid
+
+** Version 1.1.30 **
+	- Fix: Log problem with current and max bid
+	- Fix: Added default sorting by date for auction base page
+
+** Version 1.1.29 **
+	- Fix: Proxy bid bug
+
+** Version 1.1.28 **
+	- Fix: Buy now button in Woocommerce 2.5
+	- Fix: Duplicating auction icon bug
+	- Fix: Comma separated reserve price bug
+	+ Add: Future auction widget and shortcode
+	+ Add: New email template, mails to customer when customer places bid (confirmation email)
+
+** Version 1.1.27 **
+	- Fix: Problem with maxbid on poxy auctions when user is alowed to outbid himself
+	- Fix: translating strings "From&hellip;" , "To&hellip;"
+
+** Version 1.1.26 **
+	- Fix: changed ajaxurl variable
+
+** Version 1.1.25 **
+	+ Add: Option to allow highest bidder to outbid himself
+	- Fix: changed method for metaboxes so users can remove them
+	- Fix: Some small typos
+
+** Version 1.1.24 **
+	- Fix: Problem when searching auction frontend
+	- Fix: Problem with filtering past auctions
+
+** Version 1.1.23 **
+	- Fix: Problem with future auctions counter in widget
+	- Fix: Show max bid in proxy auction when user is outbidded
+
+** Version 1.1.22 **
+	- Fix: Auction winning badge check on ajax response
+ 	- Fix: Current bid refresh bug
+ 	- Fix: Ajax finish auction bug
+
+** Version 1.1.21 **
+	- Fix: Buy now button appears even if bid is bigger than buy now price
+	- Fix: Non standard thousand and decimal separator bid problem
+
+** Version 1.1.20 **
+	+ Add: Added parametar show_buy_it_now='true' for shortcode [woocommerce_simple_auctions_my_auctions]
+	- Fix: Improved plugin show/hide future and past auctions queries
+	- Fix: Non standard thousand and decimal separator problem
+
+** Version 1.1.19 **
+	- Fix: Bug in [woocommerce_simple_auctions_my_auctions] short code not showing active auctions
+
+** Version 1.1.18 **
+	- Fix: Improved plugin queries
+	- Fix: Modified capability role for view auction activity to manage_woocommerce
+	- Fix: Ajax interval bug and optimization for WC >= 2.4
+	- Fix: Table prefix bug when viewing auction activity in WP backend
+	- Fix: Rounding bug if bid value is between 0.00 and 1.00
+	+ Add: Added [vendor] tag for sending mail to auction author/vendor on auction_fail, auction_finished, auction_relist, bid_note emails - useful with multivendor plugins like WC Vendors or if you want to send email to auction author or owner in case of multivendor site
+
+** Version 1.1.17 **
+	- Fix: Compatibility with WP 4.3
+	- Fix: Auction activity on MU sites bug
+	- Fix: Delete first bid but not deleting max bid bug
+
+** Version 1.1.16 **
+    - Fix: Widget ending_soon_auctions bug
+    - Fix: Improvements on ajax checking for bids
+    + Add: Automatic relist
+
+** Version 1.1.15 **
+    - Fix: Shortcode ending_soon_auctions bug
+    - Fix: Localization bug
+
+** Version 1.1.14 **
+	- Fix: Proxy bid bug
+
+** Version 1.1.13 **
+    - Fix: Compatibility with wpmandrill
+    - Fix: Fixing add_query_arg() and remove_query_arg() usage
+
+** Version 1.1.12 **
+    + Add: Relist auction
+
+** Version 1.1.11 **
+    - Fix: Fix functions missing bug
+
+** Version 1.1.10 **
+	- Fix: Logging mysql date instead of current wordpress date for auction history
+    - Fix: Bug in loop pay now button
+    + Add: Option to filter auctions from product search page
+    + Add: Auction search widget
+    + Add: Auction activity page
+
+** Version 1.1.9 **
+	- Fix: Pay auction link
+    - Fix: Product Quantity Plus and Minus signs not showing
+
+** Version 1.1.8 **
+	- Fix: Problem with sending mail on different language
+    - Fix: Problem with cronjob
+
+** Version 1.1.7 **
+	- Fix: Problem with sending mail on Woocommerce > 2.3
+
+** Version 1.1.6 **
+	- Fix: Problem with stock when saving post
+	+ Add: Shortcode for ending soon auctions
+
+** Version 1.1.5 **
+	- Fix: Problem with showing auction finish email template
+
+** Version 1.1.4 **
+	- Fix: Filtering auctions from pages
+	- Fix: My auction shortcode and widget bug
+
+** Version 1.1.3 **
+	- Fix: Wait interval days to send reminder to pay mail
+	- Fix: Small typos
+	- Fix: Counter message when auction has started
+	+ Add: Added no-products-found template for shortcodes
+
+** Version 1.1.2 **
+	- Fix: Spelling errors
+	- Fix: Bugs with WPML
+
+** Version 1.1.1 **
+	- Fix: Live checks bug for non logged user
+
+** Version 1.1.0 **
+	+ Add: Live checks on auction bids
+	+ Add: Showing current max bidder to admin and to current max bid user
+	+ Add: WordPress 4.0 and WooCommerce 2.2 ready
+	- Fix: files cleanup
+
+** Version 1.0.25 **
+	- Fix: Send reminders mail cron bug
+
+** Version 1.0.24 **
+	- Fix: Turn off proxy bidding bug
+	- Fix: WPML compatibility
+	- Fix: Showing mutiple products bug
+
+** Version 1.0.23 **
+	- Fix: Problems with currency symbol positioning
+	- Fix: Problems with virtual and download checkboxes
+
+** Version 1.0.22 **
+	+ Add: Turn on / off admin email notification for every bid placed by user(s)
+
+** Version 1.0.21 **
+	- Fix: Proxy auction bug
+
+** Version 1.0.20 **
+	+ Add: Hook woocommerce_product_options_auction
+
+** Version 1.0.19 **
+	+ Add: Filter auction in backend
+
+** Version 1.0.18 **
+    - Fix: Problem with cronjob
+
+** Version 1.0.17 **
+	- Fix: Problem when activating on a multi-site installation of WordPress
+
+** Version 1.0.16 **
+	- Fix: Problem with out of stock bug
+
+** Version 1.0.15 **
+	- Fix: Problem with filtering date timezone
+
+** Version 1.0.14 **
+	+ Add: Filter for item condition (simple_auction_item_condition)
+	- Fix: Format date with wordpress settings
+
+** Version 1.0.13 **
+	- Fix: Language typo
+	- Fix: Optimized sql query
+	- Fix: Html number element (now gets theme styling, no more modernizr workaround!)
+
+** Version 1.0.12 **
+	- Fix: Problem same max bid in proxy mode
+
+** Version 1.0.11 **
+	- Fix: Problem with decimal bidding
+
+** Version 1.0.10 **
+	- Fix: Problem with proxy bidding setting max price
+
+** Version 1.0.9 **
+	- Fix: Problem with loading languages files
+
+** Version 1.0.8 **
+	- Fix: Problem with price on regular products
+
+** Version 1.0.7 **
+	+ Add: Send mail to admin when auction is finished
+
+** Version 1.0.6 **
+	+ Add: Do not show auctions on product category page option
+	+ Add: Do not show auctions on product tag page option
+	- Fix: Email templates path
+
+** Version 1.0.5 **
+	- Fix: Starting bid bug
+	- Fix: Product copying bug
+
+** Version 1.0.4 **
+	+ Add: Manually delete any bid
+
+** Version 1.0.3 **
+	- Fix: Problem with checkout
+	- Fix: Problem with table prefix
+	- Fix: Problems with reserve price
+	- Fix: Displaying timezone in UTC format
+	- Fix: Language (thanx to artsmart)
+
+** Version 1.0.2 **
+	- Fix: saving decimal bid to log
+	- Fix: problems with translations
+
+** Version 1.0.1 **
+ 	+ Add: support for woocommerce > 2.1
+	- Fix: couple minor bugs
+
+** Version 1.0.0 **
+   	- Initial release

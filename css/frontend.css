@@ -1,0 +1,120 @@
+/* jQuery Countdown styles 1.6.3. */
+.hasCountdown {    
+    overflow: hidden;
+    padding: 0.5em 0;
+}
+.countdown_rtl {
+    direction: rtl;
+}
+.countdown_holding span {
+    color: #888;
+}
+.countdown_row {
+    clear: both;
+    width: 100%;
+    padding: 0px 2px;
+    text-align: center;
+}
+.countdown_show1 .countdown_section {
+    width: 98%;
+}
+.countdown_show2 .countdown_section {
+    width: 48%;
+}
+.countdown_show3 .countdown_section {
+    width: 32.5%;
+}
+.countdown_show4 .countdown_section {
+    width: 24.5%;
+}
+.countdown_show5 .countdown_section {
+    width: 19.5%;
+}
+.countdown_show6 .countdown_section {
+    width: 16.25%;
+}
+.countdown_show7 .countdown_section {
+    width: 14%;
+}
+.countdown_section {
+    display: block;
+    float: left;
+    font-size: 75%;
+    text-align: center;
+}
+.countdown_amount {
+    font-size: 200%;
+}
+.countdown_descr {
+    display: block;
+    width: 100%;
+}
+
+span.winning {
+    min-height: 52px;
+    min-width: 32px;
+    padding: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    text-align: center;
+    line-height: 52px;
+    top: -16px;
+    left: -16px;
+    margin: 0;
+    -moz-border-radius: 20px;
+    border-radius: 40px;
+    background: #a2c094;
+    background: -webkit-gradient(linear,left top,left bottom,from(#a2c094),to(#85ad74));
+    background: -webkit-linear-gradient(#a2c094,#85ad74);
+    color:#fff;     
+}
+
+.widget .hasCountdown{background: none; border:none;}
+.widget .countdown_amount {font-size:120%}
+.widget .time-left,.widget  .has-finished{display: block}
+.hasCountdown .over {text-align: center; padding:1em;}
+.ajax-working {background: url(../images/ajax-loader.gif) center center no-repeat; width: 100%; height:50px;}
+.auction-bage{background: url(../images/auction-big.png) center center no-repeat; background-size: 100%; width:24px; height: 24px; position: absolute; right:10px; top:10px;}
+
+.auction_form .ui-spinner-button.ui-spinner-up.ui-corner-tr.ui-button.ui-widget.ui-state-default.ui-button-text-only {
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.auction_form .ui-spinner-button {
+  position: absolute;
+}
+.auction_form .ui-spinner-button.ui-spinner-down.ui-corner-br.ui-button.ui-widget.ui-state-default.ui-button-text-only {
+  right: 5px;
+  top: 0;
+  cursor: pointer;
+}
+
+.auction_form .ui-spinner {
+  height: 16px;
+  overflow: hidden;
+  padding-right: 20px;
+  position: relative;
+}
+
+.blink{ color:red !important; }
+
+.add-wsawl.sa-watchlist-action:before {
+    font-family: "dashicons";
+    content: "\f177";
+    margin-right: 0.5em;
+
+}
+.remove-wsawl.sa-watchlist-action:before {
+    font-family: "dashicons";
+    content: "\f530";
+    margin-right: 0.5em;
+
+}
+.my_auctions_activity .closed{ background-color: #F9F9F9 }
+.my_auctions_activity .winning{background-color:#E5F2E5;}
+
+.auction-history-table .sealed{font-weight: 700; text-align: center; padding: 1em 0;}
+
+.sealed-text .sealed-bid-desc{display: block;}
