@@ -1,4 +1,4 @@
-= WooCommerce Simple Auctions =
+= WooCommerce Auction Software =
 Author: WPEka - https://club.wpeka.com/
 
 Documentation: https://www.gitbook.com/book/ratnesh/woocommerce-auctions/
