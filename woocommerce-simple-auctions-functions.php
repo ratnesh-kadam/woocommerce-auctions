@@ -1,8 +1,8 @@
 <?php
 /**
- * WooCommerce Simple Auctions Functions
+ * WooCommerce Auction Software Functions
  *
- * Hooked-in functions for WooCommerce Simple Auctions related events on the front-end.
+ * Hooked-in functions for WooCommerce Auction Software related events on the front-end.
  */
 
 

@@ -4,7 +4,7 @@
  *
  * Action / filter hooks used for WooCommerce functions/templates
  *
- * @author   WooThemes
+ * @author   WPEka
  * @category Core
  * @package  WooCommerce/Templates
  * @version  1.6.4

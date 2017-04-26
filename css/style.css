@@ -1,0 +1,297 @@
+
+.entry-footer, #secondary{
+	display:none;
+}
+.content-area{
+	margin-right: 0%;
+    width: 100%;
+}
+.entry-content {
+    width: 100% !important;
+}
+/* ---------------- */
+#wpeka_wapff_block > section {
+  display: none;
+  border: 1px solid #ddd;
+}
+
+#wpeka_wapff_block > #tab1, #wpeka_wapff_block > #tab2{
+  display: none;
+}
+#wpeka_wapff_block > label {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #444;
+  border: 1px solid transparent;
+}
+
+#wpeka_wapff_block > label:before {
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+#wpeka_wapff_block > label[for*='1']:before {
+  content: "\f0ee";
+  font-size: 15px;
+}
+
+#wpeka_wapff_block > label[for*='2']:before {
+  content: "\f1c0";
+  font-size: 15px;
+}
+#wpeka_wapff_block > label:hover {
+  color: #888;
+  cursor: pointer;
+}
+
+#wpeka_wapff_block > input:checked + label {
+  color: #555;
+  border: 1px solid #ddd;
+  border-top: 2px solid #00f;
+  border-bottom: 1px solid #fff;
+}
+#wpeka_wapff_block > #tab1:checked ~ #content1,
+#wpeka_wapff_block > #tab2:checked ~ #content2{
+  display: block;
+}
+.wapff_upload_form > div > label {
+    float: left;
+    width: 25%;
+	text-align: left !important;
+	padding: 0 !important;
+}
+.wapff_upload_form > div {
+    float: left;
+    width: 100%;
+	padding: 10px;
+}
+.wapff_upload_form > div > input {
+    float: left;
+    height: 30px;
+    text-align: left;
+    width: 300px;
+}.row-fluid.Editor-container, #wapff_product_des, #wapff_product_sdes, .wapff_product_data1, .wapff_product_data2,
+#product_tags
+ {
+    float: right;
+    width: 75%;
+}
+#wpeka_wapff_block > section {
+    float: left;
+    width: 100%;
+}
+/* CSS for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+.product_date_price #product_date_price1, .product_date_price #product_date_price2{
+    width: 70%;
+}
+/* css for timepicker ends */
+.product_downloadable .downloadable_files label{
+    width: 100%;
+}
+#wapff_product_type, .wapff_product_virtual, .wapff_product_downloadable {
+    float: left;
+    width: 40%;
+	margin: 1%;
+}
+.wapff_product_virtual > label, .wapff_product_downloadable > label {
+    float: left;
+    padding: 0 !important;
+}
+.wapff_product_virtual > input, .wapff_product_downloadable > input {
+    margin-left: 10px !important;
+}
+.wapff_product_data1 > select {
+    height: 30px;
+}
+.wapff_product_data2_left {
+    float: left;
+    width: 25%;
+}
+.wapff_product_data2_right {
+    float: right;
+    width: 75%;
+}
+.wapff_product_data2 {
+    border: 1px solid #ddd;
+}
+.wapff_product_data2_left > div {
+    background: #e4faff none repeat scroll 0 0;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    padding: 5px;
+}
+.wapff_product_data2_left i {
+    color: #767474;
+}
+.wapff_product_data2_left > div.active {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-right: 0 none;
+}
+.wapff_product_data2_right > div {
+    display: none;
+	padding: 5px;
+}
+.wapff_product_data2_right > div.active {
+    display: block;
+}
+.wapff_product_data2_right label {
+    float: left;
+    width: 60%;
+}
+.wapff_product_data2_right > div > div {
+    float: left;
+    margin: 5px;
+    width: 100%;
+}
+.wapff_product_data2_right input {
+	margin-right: 20px;
+}
+#product_date_price2 {
+    margin-top: 10px;
+	margin-left: 0px;
+}
+.product_dimensions > input {
+    width: 100px;
+}
+.product_category {
+    float: right;
+    width: 75%;
+}
+.wpeka_myproducts_head {
+    background: #08c none repeat scroll 0 0;
+    color: #fff;
+    float: left;
+    width: 100%;
+}
+.wpeka_myproducts_name {
+    border-right: 1px solid;
+    float: left;
+    width: 25%;
+	margin-left: 20px;
+}
+.wpeka_myproducts_cname{
+	border-right: 1px solid #ddd;
+    float: left;
+    width: 25%;
+	margin-left: 20px;
+}
+.wpeka_myproducts_status {
+    float: left;
+    margin-left: 20px;
+    width: 15%;
+	border-right: 1px solid;
+}
+.wpeka_myproducts_cstatus{
+	float: left;
+    margin-left: 20px;
+    width: 15%;
+	border-right: 1px solid #ddd;
+}
+.wpeka_myproducts_date {
+    float: left;
+    margin-left: 20px;
+    width: 25%;
+	border-right: 1px solid;
+}
+.wpeka_myproducts_cdate{
+	float: left;
+    margin-left: 20px;
+    width: 25%;
+	border-right: 1px solid #ddd;
+}
+.wpeka_myproducts_view {
+    float: left;
+    margin-left: 20px;
+    width: 15%;
+}
+.wpeka_myproducts_cview{
+	float: left;
+    margin-left: 20px;
+    width: 15%;
+}
+.wpeka_myproducts_content {
+    border-bottom: 1px solid #ddd;
+    float: left;
+    width: 100%;
+}
+.wapff_product_des .dropdown-toggle, .wapff_product_des .dropdown-toggle::after{
+	width: auto;
+	height: auto;
+	content: "";
+}
+.wpeka_upload {
+    background: #08c none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    float: right !important;
+    margin: 10px;
+    text-align: center;
+    width: 200px !important;
+}
+.downloadable_files_head {
+    float: right;
+    width: 100%;
+}
+.downloadable_files_head_name {
+    float: left;
+    width: 35%;
+}
+.downloadable_files_head_url {
+    float: left;
+    width: 35%;
+}
+.downloadable_files_con {
+    float: right;
+    width: 100%;
+	margin-top: 5px;
+}
+.downloadable_files_con_name {
+    float: left;
+    width: 35%;
+}
+.downloadable_files_con_url {
+    float: left;
+    margin-left: 1%;
+    width: 63%;
+}
+.downloadable_files_addfile {
+    cursor: pointer;
+    
+    margin: 0 0 10px;
+    width: 70%;
+}
+.download_limit, .download_expiry, .download_type {
+    float: left;
+    width: 100%;
+}
+#download_limit, #download_expiry, #download_type {
+    float: left;
+	width: 30%;
+}
+.download_limit > span, .download_expiry > span, .download_type > span {
+    float: right;
+    width: 100%;
+}
+
+.downloadable_files_con_url > input {
+    width: 100%;
+}
+.downloadable_files_addfile > span {
+    background: #08c none repeat scroll 0 0;
+    color: #fff;
+    padding: 5px;
+}

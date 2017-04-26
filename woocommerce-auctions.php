@@ -1,13 +1,13 @@
 <?php
 /*
- * Plugin Name: WooCommerce Auctions
- * Plugin URI: http://www.wpgenie.org/woocommerce-simple-auctions/
+ * Plugin Name: WooCommerce Auction Software
+ * Plugin URI: https://club.wpeka.com/product/woocommerce-auctionsoftware/
  * Description: Easily extend WooCommerce with auction features and functionalities.
  * Version: 1.0.0
- * Author: wpeka
+ * Author: WPEka
  * Author URI: https://club.wpeka.com/
  * Requires at least: 3.6
- * Tested up to: 4.7.3
+ * Tested up to: 4.7.4
  *
  * Text Domain: wc_simple_auctions
  * Domain Path: /lang/
@@ -21,6 +21,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+define ( 'WPEKA_WAPFF_URL', plugin_dir_url(__FILE__));
 // Exit if accessed directly
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
@@ -48,8 +49,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     if (!class_exists('WooCommerce_simple_auction')) {
         class WooCommerce_simple_auction
         {
- 
-
             /**
              * @var string
              */
@@ -57,6 +56,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             public $dbversion = '1.2';
 
+            public static $plugin_file = __FILE__;
+            
             public $plugin_prefix;
             public $plugin_url;
             public $plugin_path;
@@ -132,7 +133,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
 
                 if (get_option('simple_auctions_curent_bidder_can_bid') == false) {
-                    add_option('simple_auctions_curent_bidder_can_bid ', 'no');
+                    add_option('simple_auctions_curent_bidder_can_bid', 'no');
                 }
 
                 update_option('simple_auctions_database_version', $this->dbversion);
@@ -262,6 +263,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     add_filter('parse_query', array($this, 'admin_posts_filter'));
 
                     add_action('admin_menu', array($this, 'add_auction_activity_page'));
+                    
+                    //add_action('admin_menu', array($this, 'add_auction_management_page'));
+                    //add_action('admin_menu', array($this, 'add_auction_user_management_page'));
+                    
                     add_filter('set-screen-option', array($this, 'wc_simple_auctions_set_option'), 10, 3);
 
                     add_filter('woocommerce_simple_auctions_settings', array($this, 'remove_ordering_setings'), 10);
@@ -372,7 +377,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 include_once 'classes/dashboard.php';
                 include_once 'classes/wc-simple-auction-activity-list.php';
                 include_once 'woocommerce-simple-auctions-functions.php';
-
+                include_once 'classes/class-wca-query.php';
+                
                 $this->dashboard = new WooCommerce_simple_auction_Dashboard();
                 if (defined('DOING_AJAX')) {
                     $this->ajax_includes();
@@ -392,6 +398,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             {
                 include_once 'woocommerce-simple-ajax.php'; // Ajax functions for admin and the front-end
             }
+            
+            public static function is_woocommerce_pre( $version ) {
+
+		if ( ! defined( 'WC_VERSION' ) || version_compare( WC_VERSION, $version, '<' ) ) {
+			$woocommerce_is_pre_version = true;
+		} else {
+			$woocommerce_is_pre_version = false;
+		}
+
+		return $woocommerce_is_pre_version;
+            }
+            
             /**
              * Add to mail class
              *
@@ -3201,7 +3219,7 @@ endif;?>
                 );
                 add_screen_option($option, $args);
             }
-
+            
             function wc_simple_auctions_set_option($status, $option, $value) 
             {
                 if ('logs_per_page' == $option) {
@@ -3548,7 +3566,6 @@ endif;?>
         }
     }
     $plugin = plugin_basename(__FILE__);
-
     if (is_plugin_active($plugin)) {
         deactivate_plugins($plugin);
     }

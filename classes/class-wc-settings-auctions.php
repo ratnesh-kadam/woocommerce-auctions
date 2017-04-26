@@ -12,57 +12,75 @@ if (! defined('ABSPATH') ) { exit; // Exit if accessed directly
 }
 if (class_exists('WC_Settings_Page') ) :
 
-    /**
+/**
  * WC_Settings_Accounts
  */
-    class WC_Settings_Simple_Auctions extends WC_Settings_Page
-    {
+class WC_Settings_Simple_Auctions extends WC_Settings_Page {
 
         /**
-     * Constructor.
-     */
+        * Constructor.
+        */
         public function __construct() 
         {
+            
             $this->id    = 'simple_auctions';
             $this->label = __('Auctions', 'wc_simple_auctions');
 
-            add_filter('woocommerce_settings_tabs_array', array( $this, 'add_settings_page' ), 20);
-            add_action('woocommerce_settings_' . $this->id, array( $this, 'output' ));
-            add_action('woocommerce_settings_save_' . $this->id, array( $this, 'save' ));
+            parent::__construct();
+            
+            //add_filter('woocommerce_settings_tabs_array', array( $this, 'add_settings_page' ), 20);
+            //add_action('woocommerce_settings_' . $this->id, array( $this, 'output' ));
+            //add_action('woocommerce_settings_save_' . $this->id, array( $this, 'save' ));
         }
 
         /**
-     * Get settings array
-     *
-     * @return array
-     */
-        public function get_settings() 
-        {
+	 * Get sections
+	 *
+	 * @since 1.0.0
+	 * @return array
+	 */
+	public function get_sections() {
 
-            return apply_filters(
-                'woocommerce_' . $this->id . '_settings', array(
+		$sections = array(
+			''         => __( 'General', 'wc_simple_auctions' )
+		);
 
-                array(    'title' => __('Simple auction options', 'wc_simple_auctions'), 'type' => 'title','desc' => '', 'id' => 'simple_auction_options' ),
-                array(
-                'title'    => __('Default Auction Sorting', 'wc_simple_auctions'),
-                'desc'     => __('This controls the default sort order of the auctions.', 'wc_simple_auctions'),
-                'id'       => 'wsa_default_auction_orderby',
-                'class'    => 'wc-enhanced-select',
-                'css'      => 'min-width:300px;',
-                'default'  => 'menu_order',
-                'type'     => 'select',
-                'options'  => apply_filters(
-                    'wsa_default_auction_orderby_options', array(
-                                                'menu_order' => __('Default sorting (custom ordering + name)', 'woocommerce'),
-                                                'date'       => __('Sort by most recent', 'woocommerce'),
-                                                'bid_asc' => __('Sort by current bid: Low to high', 'wc_simple_auctions'),
-                                                'bid_desc' => __('Sort by current bid: High to low', 'wc_simple_auctions'),
-                                                'auction_end' => __('Sort auction by ending soonest', 'wc_simple_auctions'),
+		return apply_filters( 'woocommerce_get_sections_' . $this->id, $sections );
+	}
+        /**
+        * Get settings array
+        *
+        * @return array
+        */
+        public function get_settings( $current_section = '' ) {
+            
+                
+                
+                        $settings = apply_filters( 'woocommerce_auction_general_settings', array(
+
+                                array( 
+                                        'title' => __('Auction software options', 'wc_simple_auctions'),
+                                        'type' => 'title','desc' => '', 'id' => 'simple_auction_options' ),
+                                
+                                array(
+                                        'title'    => __('Default Auction Sorting', 'wc_simple_auctions'),
+                                        'desc'     => __('This controls the default sort order of the auctions.', 'wc_simple_auctions'),
+                                        'id'       => 'wsa_default_auction_orderby',
+                                        'class'    => 'wc-enhanced-select',
+                                        'css'      => 'min-width:300px;',
+                                        'default'  => 'menu_order',
+                                        'type'     => 'select',
+                                        'options'  => apply_filters(
+                                                'wsa_default_auction_orderby_options', array(
+                                                        'menu_order' => __('Default sorting (custom ordering + name)', 'woocommerce'),
+                                                        'date'       => __('Sort by most recent', 'woocommerce'),
+                                                        'bid_asc' => __('Sort by current bid: Low to high', 'wc_simple_auctions'),
+                                                        'bid_desc' => __('Sort by current bid: High to low', 'wc_simple_auctions'),
+                                                        'auction_end' => __('Sort auction by ending soonest', 'wc_simple_auctions'),
                                                 'auction_started' => __('Sort auction by recently started', 'wc_simple_auctions'),
                                                 'auction_activity' => __('Sort auction by most active', 'wc_simple_auctions'),
-                                                
-                    ) 
-                ),
+                                        ) 
+                                ),
                 'desc_tip' =>  true,
                 ),
                                         array(
@@ -78,6 +96,71 @@ if (class_exists('WC_Settings_Page') ) :
                                         'type'                 => 'checkbox',
                                         'id'                => 'simple_auctions_future_enabled',
                                         'default'             => 'yes'
+                                        ),
+                                        array(
+					'title'           => __( 'Auction Type', 'wc_simple_auctions' ),
+					'desc'            => __( 'Standard Auctions', 'wc_simple_auctions' ),
+					'id'              => 'simple_auctions_standard_enabled',
+					'default'         => 'yes',
+					'type'            => 'checkbox',
+					'checkboxgroup'   => 'start',
+					
+				),
+				array(
+					'desc'            => __( 'Reverse Auctions', 'wc_simple_auctions' ),
+					'id'              => 'simple_auctions_reverse_enabled',
+					'default'         => 'no',
+					'type'            => 'checkbox',
+					'checkboxgroup'   => '',
+					'show_if_checked' => 'yes',
+					'autoload'        => false,
+				),
+                            
+                                array(
+					'title'    => __( 'Fraud Report', 'wc_simple_auctions' ),
+					'desc'     => __( 'If set to On, users can report an auction as fraud or objectionable.', 'wc_simple_auctions' ),
+					'id'       => 'simple_auctions_fraud_report',
+					'type'     => 'select',
+					'class'    => 'wc-enhanced-select',
+					'css'      => 'min-width:50px;',
+					'default'  => 'on',
+					'desc_tip' =>  true,
+					'options'  => array(
+						'on'     => __( 'ON', 'wc_simple_auctions' ),
+						'off' => __( 'OFF', 'wc_simple_auctions' ),
+					),
+					'autoload' => false
+                                        ),
+                    
+                                        array(
+					'title'    => __( 'Admin Listing Only', 'wc_simple_auctions' ),
+					'desc'     => __( 'If Yes, only Administrators will be able to submit an auction', 'wc_simple_auctions' ),
+					'id'       => 'simple_auctions_only_admin_listing',
+					'type'     => 'select',
+					'class'    => 'wc-enhanced-select',
+					'css'      => 'min-width:50px;',
+					'default'  => 'yes',
+					'desc_tip' =>  true,
+					'options'  => array(
+						'yes'     => __( 'YES', 'wc_simple_auctions' ),
+						'no' => __( 'NO', 'wc_simple_auctions' ),
+					),
+					'autoload' => false
+                                        ),
+                                        array(
+					'title'    => __( 'Show Reserve Price', 'wc_simple_auctions' ),
+					'desc'     => __( 'SHOW RESERVE PRICE.', 'wc_simple_auctions' ),
+					'id'       => 'simple_auctions_show_reserve_price',
+					'type'     => 'select',
+					'class'    => 'wc-enhanced-select',
+					'css'      => 'min-width:50px;',
+					'default'  => 'no',
+					'desc_tip' =>  true,
+					'options'  => array(
+						'yes'     => __( 'YES', 'wc_simple_auctions' ),
+						'no' => __( 'NO', 'wc_simple_auctions' ),
+					),
+					'autoload' => false
                                         ),
                                         array(
                                         'title'             => __("Do not show auctions on shop page", 'wc_simple_auctions'),
@@ -190,8 +273,36 @@ Use upper-case characters for mandatory periods, or the corresponding lower-case
                                         array( 'type' => 'sectionend', 'id' => 'simple_auction_options'),
 
                 )
-            ); // End pages settings
+            );
+            
+            return apply_filters( 'woocommerce_get_settings_' . $this->id, $settings, $current_section );
+             // End pages settings
         }
+        /**
+	 * Output the settings
+	 *
+	 * @since 1.0.0
+	 */
+	public function output() {
+		global $current_section;
+
+		$settings = $this->get_settings( $current_section );
+		WC_Admin_Settings::output_fields( $settings );
+	}
+
+
+	/**
+	 * Save settings
+	 *
+	 * @since 1.0.0
+	 */
+	public function save() {
+		global $current_section;
+
+		$settings = $this->get_settings( $current_section );
+		WC_Admin_Settings::save_fields( $settings );
+	}
+        
     }
     return new WC_Settings_Simple_Auctions();
 
