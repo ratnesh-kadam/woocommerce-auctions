@@ -271,10 +271,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 											<label for="product_note">Product Note</label>
 											<textarea id="product_note" name="product_note"></textarea>
 										</div>
-										<div class="product_menu_order">
-											<label for="product_menu_order">Menu Order</label>
-											<input id="product_menu_order" name="product_menu_order">
-										</div>
 										<div class="product_enable_review">
 											<label for="product_enable_review">Enable Reviews</label>
 											<input type="checkbox" id="product_enable_review" name="product_enable_review">
