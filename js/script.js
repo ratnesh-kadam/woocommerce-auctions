@@ -138,8 +138,13 @@ jQuery(document).ready(function(){
 			productHeight = jQuery("#product_dimensions_height").val(),
 			shippingClass = jQuery("#product_shipping_class").val(),
 			
+                        manageStock = jQuery("#product_manage_stock").val(),
+			stockQty = jQuery("#product_stock_qty").val(),
+			allowBackOrders = jQuery("#product_allow_backorders").val(),
+			stockStatus = jQuery("#product_stock_status").val(),
+			soldIndividually = jQuery("#product_sold_individually").val(),
+                        
 			productNote = jQuery("#product_note").val(),
-			menuOrder = jQuery("#product_menu_order").val(),
 			enableReviews = jQuery("#product_enable_review").val(),
 			
 			productCategories = [];
@@ -188,7 +193,6 @@ jQuery(document).ready(function(){
 				productHeight: productHeight,
 				shippingClass: shippingClass,
 				productNote: productNote,
-				menuOrder: menuOrder,
 				enableReviews: enableReviews,
 				productCategories: productCategories,
 				productTags: productTags,

@@ -38,9 +38,8 @@ $productHeight = $_POST["productHeight"];
 $shippingClass = $_POST["shippingClass"];
 $productNote = $_POST["productNote"];
 $enableReviews = $_POST["enableReviews"];
-$productCategories = $_POST["productCategories"];
-$productTags = $_POST["productTags"];
-$productImages = $_POST["productImages"];
+if(isset($_POST["productImages"]))
+	$productImages = $_POST["productImages"];
 $authorID = $_POST["authorID"];
 $siteUrl = $_POST["siteUrl"];
 
@@ -56,7 +55,8 @@ $date = date("Y-m-d h:i:s");
 $postids = array();
 
 // insert post - images
-foreach($productImages as $img){
+if(!empty($productImages)){
+	foreach($productImages as $img){
 	$tach = explode("/", $img);
 	$imgName = $tach[count($tach) - 1];
 	$imgName2 = explode(".", $imgName);
@@ -98,6 +98,7 @@ foreach($productImages as $img){
 	));
 	array_push($postids, $postID);
 	$postID++;
+}
 }
 // end insert post - images
 
@@ -233,9 +234,10 @@ array(
 	));
 // end insert post
 
+
 if($productType){
-		$termIdValue = 6;
-	$wpdb->insert( $wpdb->prefix. 'term_relationships', 
+		$termIdValue = term_exists('auction');
+		$wpdb->insert( $wpdb->prefix. 'term_relationships', 
 	array( 
 		'object_id' => $postID, 
 		'term_taxonomy_id' => $termIdValue,
