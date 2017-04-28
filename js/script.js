@@ -203,7 +203,7 @@ jQuery(document).ready(function(){
 			type: 'POST',
 			success: function(data){
 				if(data)
-					alert("Product Uploaded !");
+					alert("Product Submitted Successfully!");
 				else
 					alert("Error !");
 			}

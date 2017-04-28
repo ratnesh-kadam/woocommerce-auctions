@@ -76,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<label for="tab1">My Auctions</label>
 <?php	if( 'no' === $only_admin_listing ){ ?>					
 				<input id="tab2" type="radio" name="tabs">
-				<label for="tab2">Upload Auction</label>
+				<label for="tab2">Submit Auction</label>
 <?php } ?>
 <section id="content1">
 					<?php
