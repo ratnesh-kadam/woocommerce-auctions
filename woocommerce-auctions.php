@@ -375,8 +375,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 include_once 'classes/class-wc-product-auction.php';
                 include_once 'classes/dashboard.php';
-                include_once 'classes/wc-simple-auction-activity-list.php';
-                include_once 'woocommerce-simple-auctions-functions.php';
+                include_once 'classes/wc-auction-software-activity-list.php';
+                include_once 'woocommerce-auction-software-functions.php';
                 include_once 'classes/class-wca-query.php';
                 
                 $this->dashboard = new WooCommerce_simple_auction_Dashboard();
@@ -396,7 +396,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             public function ajax_includes() 
             {
-                include_once 'woocommerce-simple-ajax.php'; // Ajax functions for admin and the front-end
+                include_once 'woocommerce-auction-software-ajax.php'; // Ajax functions for admin and the front-end
             }
             
             public static function is_woocommerce_pre( $version ) {
@@ -513,13 +513,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             public function frontend_includes() 
             {
                 // Functions
-                include_once 'woocommerce-simple-auctions-templating.php';
-                include_once 'woocommerce-simple-auctions-hooks.php';
+                include_once 'woocommerce-auction-software-templating.php';
+                include_once 'woocommerce-auction-software-hooks.php';
                 // Classes
                 include_once 'classes/class-wc-bid.php';
-                include_once 'classes/woocommerce-simple-auctions-shortcode-my-auctions.php';
-                include_once 'classes/woocommerce-simple-auctions-shortcodes.php';
-                $this->shortcodes = new WC_Shortcode_Simple_Auction();
+                include_once 'classes/woocommerce-auction-software-shortcode-my-auctions.php';
+                include_once 'classes/woocommerce-auction-software-shortcodes.php';
+                $this->shortcodes = new WC_Shortcode_Auction_Software();
             }
 
             /**
@@ -617,7 +617,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     if ('product' == get_post_type()) {
                         wp_register_script(
                             'simple-auction-admin',
-                            $this->plugin_url . '/js/simple-auction-admin.js',
+                            $this->plugin_url . '/js/auction-software-admin.js',
                             array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'timepicker-addon'),
                             '1',
                             true
@@ -679,7 +679,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 wp_localize_script('simple-auction-countdown-language', 'data', $language_data);
                 wp_enqueue_script('simple-auction-countdown-language');
-                wp_register_script('simple-auction-frontend', $this->plugin_url . 'js/simple-auction-frontend.js', array('jquery', 'simple-auction-countdown'), $this->version, false);
+                wp_register_script('simple-auction-frontend', $this->plugin_url . 'js/auction-software-frontend.js', array('jquery', 'simple-auction-countdown'), $this->version, false);
 
                 $custom_data = array('finished' => __('Auction has finished!', 'wc_simple_auctions'), 'gtm_offset' => get_option('gmt_offset'), 'started' => __('Auction has started! Please refresh your page.', 'wc_simple_auctions'));
                 $simple_auctions_live_check = get_option('simple_auctions_live_check');
@@ -1553,7 +1553,7 @@ Use upper-case characters for mandatory periods, or the corresponding lower-case
             function shortcode_my_auctions($atts) 
             {
                 global $woocommerce;
-                return WC_Shortcodes::shortcode_wrapper(array('WC_Shortcode_Simple_Auction_My_Auctions', 'output'), $atts);
+                return WC_Shortcodes::shortcode_wrapper(array('WC_Shortcode_Auction_Software_My_Auctions', 'output'), $atts);
             }
             /**
              *  Add meta box to the product editing screen
@@ -3242,7 +3242,7 @@ endif;?>
                             printf('<div class="wrap" id="wpse-list-table"><h2>%s</h2>', __('Auction activity', 'wc_simple_auctions'));
                             echo '<form id="wpse-list-table-form" method="get">';
 
-                            $wp_list_table = new wc_simple_auctions_List_Table();
+                            $wp_list_table = new wc_auction_software_List_Table();
                             $wp_list_table->prepare_items();
                             $wp_list_table->search_box('search', 'search_id');
                 foreach ($_GET as $key => $value) {

@@ -1,9 +1,9 @@
 <?php
 /**
- * Simple Auctions Shortcode
+ * Auction Software Shortcode
  */
 
-class WC_Shortcode_Simple_Auction extends WC_Shortcodes
+class WC_Shortcode_Auction_Software extends WC_Shortcodes
 {
 
         public function __construct() 

@@ -40,7 +40,7 @@ if(!class_exists('WP_List_Table')) {
  * 
  * Our theme for this list table is going to be movies.
  */
-class wc_simple_auctions_List_Table extends WP_List_Table
+class wc_auction_software_List_Table extends WP_List_Table
 {
     
    

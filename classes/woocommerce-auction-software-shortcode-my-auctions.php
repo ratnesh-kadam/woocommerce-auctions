@@ -3,7 +3,7 @@
  * Shortcode [woocommerce_simple_auctions_my_auctions]
  */
 
-class WC_Shortcode_Simple_Auction_My_Auctions
+class WC_Shortcode_Auction_Software_My_Auctions
 {
 
     /**
