@@ -53,7 +53,7 @@ class WooCommerce_simple_auction_Dashboard
     {
         global $wp_meta_boxes;
         
-        wp_add_dashboard_widget('sa_dashboard_products_news', __('wpgenie.org - Our latest themes and plugins', 'wc_simple_auctions'), array($this, 'dashboard_products_news'));
+        wp_add_dashboard_widget('sa_dashboard_products_news', __('wpgenie.org - Our latest themes and plugins', 'wc_auction_software'), array($this, 'dashboard_products_news'));
 
         $widgets_on_side = array(
             'sa_dashboard_products_news',

@@ -11,7 +11,7 @@ $product_data = wc_get_product($product_id);
 
 echo $email_heading . "\n\n";
 
-printf(__("Your bid for %s has been outbid. The current bid is: %s", 'wc_simple_auctions'), $product_data->get_title(), wc_price($product_data->get_curent_bid())); 
+printf(__("Your bid for %s has been outbid. The current bid is: %s", 'wc_auction_software'), $product_data->get_title(), wc_price($product_data->get_curent_bid())); 
 echo "\n\n";
 echo get_permalink($product_id);
 echo "\n\n";

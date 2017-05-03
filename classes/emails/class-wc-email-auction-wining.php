@@ -49,15 +49,15 @@ class WC_Email_SA_Auction_Win extends WC_Email
         global $woocommerce_auctions;
 
         $this->id                 = 'auction_win';
-        $this->title             = __('Auction Win', 'wc_simple_auctions');
-        $this->description        = __('Auction won emails are sent when a user wins the auction.', 'wc_simple_auctions');
+        $this->title             = __('Auction Win', 'wc_auction_software');
+        $this->description        = __('Auction won emails are sent when a user wins the auction.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_win.php';
         $this->template_plain     = 'emails/plain/auction_win.php';
         $this->template_base    = $woocommerce_auctions->plugin_path. 'templates/';
 
-        $this->subject             = __('Auction won on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('You have won the auction!', 'wc_simple_auctions');
+        $this->subject             = __('Auction won on {blogname}', 'wc_auction_software');
+        $this->heading          = __('You have won the auction!', 'wc_auction_software');
         
         $this->checkout_url     = simple_auction_get_checkout_url();
 

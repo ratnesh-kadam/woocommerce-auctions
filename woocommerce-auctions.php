@@ -9,7 +9,7 @@
  * Requires at least: 3.6
  * Tested up to: 4.7.4
  *
- * Text Domain: wc_simple_auctions
+ * Text Domain: wc_auction_software
  * Domain Path: /lang/
  *
  * Copyright:
@@ -73,14 +73,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             public function __construct() 
             {
-                $this->plugin_prefix = 'wc_simple_auctions';
+                $this->plugin_prefix = 'wc_auction_software';
                 $this->plugin_basefile = plugin_basename(__FILE__);
                 $this->plugin_url = plugin_dir_url($this->plugin_basefile);
                 $this->plugin_path = trailingslashit(dirname(__FILE__));
 
 
-                $this->auction_types =  array('normal' => __('Normal', 'wc_simple_auctions'), 'reverse' => __('Reverse', 'wc_simple_auctions'));
-                $this->auction_item_condition =  array('new' => __('New', 'wc_simple_auctions'), 'used' => __('Used', 'wc_simple_auctions'));
+                $this->auction_types =  array('normal' => __('Normal', 'wc_auction_software'), 'reverse' => __('Reverse', 'wc_auction_software'));
+                $this->auction_item_condition =  array('new' => __('New', 'wc_auction_software'), 'used' => __('Used', 'wc_auction_software'));
 
                 add_action('woocommerce_init', array(&$this, 'init'));
                 //require_once( ABSPATH .'wp-includes/pluggable.php');
@@ -267,7 +267,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     //add_action('admin_menu', array($this, 'add_auction_management_page'));
                     //add_action('admin_menu', array($this, 'add_auction_user_management_page'));
                     
-                    add_filter('set-screen-option', array($this, 'wc_simple_auctions_set_option'), 10, 3);
+                    add_filter('set-screen-option', array($this, 'wc_auction_software_set_option'), 10, 3);
 
                     add_filter('woocommerce_simple_auctions_settings', array($this, 'remove_ordering_setings'), 10);
 
@@ -301,7 +301,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     add_filter('pre_get_posts', array($this, 'auction_arhive_pre_get_posts'));
                     add_action('pre_get_posts', array($this, 'query_auction_archive'), 1);
 
-                    add_shortcode('woocommerce_simple_auctions_my_auctions', array($this, 'shortcode_my_auctions'));
+                    add_shortcode('woocommerce_auction_software_my_auctions', array($this, 'shortcode_my_auctions'));
 
                     if (get_option('simple_auctions_watchlists', 'yes') == 'yes') {
                         add_action('woocommerce_after_bid_form', array($this, 'add_watchlist_link'), 10);
@@ -360,9 +360,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             public function load_plugin_textdomain() 
             {
                 /* Localisation */
-                $locale = apply_filters('plugin_locale', get_locale(), 'wc_simple_auctions');
-                load_textdomain('wc_simple_auctions', WP_PLUGIN_DIR . "/" . plugin_basename(dirname(__FILE__)) . '/lang/wc_simple_auctions-' . $locale . '.mo');
-                load_plugin_textdomain('wc_simple_auctions', false, dirname(plugin_basename(__FILE__)) . '/lang/');
+                $locale = apply_filters('plugin_locale', get_locale(), 'wc_auction_software');
+                load_textdomain('wc_auction_software', WP_PLUGIN_DIR . "/" . plugin_basename(dirname(__FILE__)) . '/lang/wc_auction_software-' . $locale . '.mo');
+                load_plugin_textdomain('wc_auction_software', false, dirname(plugin_basename(__FILE__)) . '/lang/');
             }
             /**
              * Include WooCommerce Simple Auction files
@@ -535,9 +535,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     return $links;
                 }
                 if ($file == $this->plugin_basefile) {
-                    $links[] = '<a href="http://wpgenie.org/woocommerce-simple-auctions/documentation/" target="_blank">' . __('Docs', 'wc_simple_auctions') . '</a>';
-                    $links[] = '<a href="http://codecanyon.net/user/wpgenie#contact" target="_blank">' . __('Support', 'wc_simple_auctions') . '</a>';
-                    $links[] = '<a href="http://codecanyon.net/user/wpgenie/" target="_blank">' . __('More WooCommerce Extensions', 'wc_simple_auctions') . '</a>';
+                    $links[] = '<a href="http://wpgenie.org/woocommerce-simple-auctions/documentation/" target="_blank">' . __('Docs', 'wc_auction_software') . '</a>';
+                    $links[] = '<a href="http://codecanyon.net/user/wpgenie#contact" target="_blank">' . __('Support', 'wc_auction_software') . '</a>';
+                    $links[] = '<a href="http://codecanyon.net/user/wpgenie/" target="_blank">' . __('More WooCommerce Extensions', 'wc_auction_software') . '</a>';
                 }
                 return $links;
             }
@@ -556,18 +556,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $user_id = $current_user->ID;
                     if (get_option('Woocommerce_simple_auction_cron_check') != "yes" && !get_user_meta($user_id, 'cron_check_ignore_notice')) {
                         echo '<div class="updated">
-					   	<p>' . sprintf(__('Woocommerce Simple Auction recommends that you set up a cron job to check finished: <b>%s/?auction-cron=check</b>. Set it to every minute| <a href="%s">Hide Notice</a>', 'wc_simple_auctions'), get_bloginfo('url'), esc_attr(add_query_arg('cron_check_ignore', '0'))) . '</p>
+					   	<p>' . sprintf(__('Woocommerce Simple Auction recommends that you set up a cron job to check finished: <b>%s/?auction-cron=check</b>. Set it to every minute| <a href="%s">Hide Notice</a>', 'wc_auction_software'), get_bloginfo('url'), esc_attr(add_query_arg('cron_check_ignore', '0'))) . '</p>
 						</div>';
                     }
                     if (get_option('Woocommerce_simple_auction_cron_mail') != "yes" && !get_user_meta($user_id, 'cron_mail_ignore_notice')) {
                         echo '<div class="updated">
-					   	<p>' . sprintf(__('Woocommerce Simple Auction recommends that you set up a cron job to send emails: <b>%s/?auction-cron=mails</b>. Set it every 2 hours | <a href="%s">Hide Notice</a>', 'wc_simple_auctions'), get_bloginfo('url'), esc_attr(add_query_arg('cron_mail_ignore', '0'))) . '</p>
+					   	<p>' . sprintf(__('Woocommerce Simple Auction recommends that you set up a cron job to send emails: <b>%s/?auction-cron=mails</b>. Set it every 2 hours | <a href="%s">Hide Notice</a>', 'wc_auction_software'), get_bloginfo('url'), esc_attr(add_query_arg('cron_mail_ignore', '0'))) . '</p>
 						</div>';
                     }
 
                     if (get_option('Woocommerce_simple_auction_cron_relist') != "yes" && !get_user_meta($user_id, 'cron_relist_ignore_notice')) {
                         echo '<div class="updated">
-					   	<p>' . sprintf(__('For automated relisting feature please setup cronjob every 1 hour: <b>%s/?auction-cron=relist</b>. | <a href="%s">Hide Notice</a>', 'wc_simple_auctions'), get_bloginfo('url'), esc_attr(add_query_arg('cron_relist_ignore', '0'))) . '</p>
+					   	<p>' . sprintf(__('For automated relisting feature please setup cronjob every 1 hour: <b>%s/?auction-cron=relist</b>. | <a href="%s">Hide Notice</a>', 'wc_auction_software'), get_bloginfo('url'), esc_attr(add_query_arg('cron_relist_ignore', '0'))) . '</p>
 						</div>';
                     }
                 }
@@ -601,7 +601,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             public function add_product_type($types) 
             {
-                $types['auction'] = __('Auction', 'wc_simple_auctions');
+                $types['auction'] = __('Auction', 'wc_auction_software');
                 return $types;
             }
 
@@ -652,28 +652,28 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 wp_register_script('simple-auction-countdown-language', $this->plugin_url . 'js/jquery.countdown.language.js', array('jquery', 'simple-auction-countdown'), $this->version, false);
 
                 $language_data = array('labels' => array(
-                'Years' => __('Years', 'wc_simple_auctions'),
-                'Months' => __('Months', 'wc_simple_auctions'),
-                'Weeks' => __('Weeks', 'wc_simple_auctions'),
-                'Days' => __('Days', 'wc_simple_auctions'),
-                'Hours' => __('Hours', 'wc_simple_auctions'),
-                'Minutes' => __('Minutes', 'wc_simple_auctions'),
-                'Seconds' => __('Seconds', 'wc_simple_auctions'),
+                'Years' => __('Years', 'wc_auction_software'),
+                'Months' => __('Months', 'wc_auction_software'),
+                'Weeks' => __('Weeks', 'wc_auction_software'),
+                'Days' => __('Days', 'wc_auction_software'),
+                'Hours' => __('Hours', 'wc_auction_software'),
+                'Minutes' => __('Minutes', 'wc_auction_software'),
+                'Seconds' => __('Seconds', 'wc_auction_software'),
                 ),
                 'labels1' => array(
-                'Year' => __('Year', 'wc_simple_auctions'),
-                'Month' => __('Month', 'wc_simple_auctions'),
-                'Week' => __('Week', 'wc_simple_auctions'),
-                'Day' => __('Day', 'wc_simple_auctions'),
-                'Hour' => __('Hour', 'wc_simple_auctions'),
-                'Minute' => __('Minute', 'wc_simple_auctions'),
-                'Second' => __('Second', 'wc_simple_auctions'),
+                'Year' => __('Year', 'wc_auction_software'),
+                'Month' => __('Month', 'wc_auction_software'),
+                'Week' => __('Week', 'wc_auction_software'),
+                'Day' => __('Day', 'wc_auction_software'),
+                'Hour' => __('Hour', 'wc_auction_software'),
+                'Minute' => __('Minute', 'wc_auction_software'),
+                'Second' => __('Second', 'wc_auction_software'),
                 ),
                 'compactLabels' => array(
-                'y' => __('y', 'wc_simple_auctions'),
-                'm' => __('m', 'wc_simple_auctions'),
-                'w' => __('w', 'wc_simple_auctions'),
-                'd' => __('d', 'wc_simple_auctions'),
+                'y' => __('y', 'wc_auction_software'),
+                'm' => __('m', 'wc_auction_software'),
+                'w' => __('w', 'wc_auction_software'),
+                'd' => __('d', 'wc_auction_software'),
                 ),
                 );
 
@@ -681,7 +681,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 wp_enqueue_script('simple-auction-countdown-language');
                 wp_register_script('simple-auction-frontend', $this->plugin_url . 'js/auction-software-frontend.js', array('jquery', 'simple-auction-countdown'), $this->version, false);
 
-                $custom_data = array('finished' => __('Auction has finished!', 'wc_simple_auctions'), 'gtm_offset' => get_option('gmt_offset'), 'started' => __('Auction has started! Please refresh your page.', 'wc_simple_auctions'));
+                $custom_data = array('finished' => __('Auction has finished!', 'wc_auction_software'), 'gtm_offset' => get_option('gmt_offset'), 'started' => __('Auction has started! Please refresh your page.', 'wc_auction_software'));
                 $simple_auctions_live_check = get_option('simple_auctions_live_check');
                 $simple_auctions_live_check_interval = get_option('simple_auctions_live_check_interval');
 
@@ -711,7 +711,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 global $product;
                 if(method_exists($product, 'get_type') && $product->get_type() == 'auction') {
                     $tabs['simle_auction_history'] = array(
-                    'title' => __('Auction history', 'wc_simple_auctions'),
+                    'title' => __('Auction history', 'wc_auction_software'),
                     'priority' => 25,
                     'callback' => array($this, 'auction_tab_callback'),
                     'content' => 'auction-history',
@@ -741,7 +741,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 $auction_tab = array(
                 'auction_tab' => array(
-                  'label'  => __('Auction', 'wc_simple_auctions'),
+                  'label'  => __('Auction', 'wc_auction_software'),
                   'target' => 'auction_tab',
                   'class'  => array( 'auction_tab', 'show_if_auction' , 'show_if_auction', 'hide_if_grouped', 'hide_if_external','hide_if_variable','hide_if_simple' ),
                  ),
@@ -763,18 +763,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 echo '<div id="auction_tab" class="panel woocommerce_options_panel">';
 
-                woocommerce_wp_select(array('id' => '_auction_item_condition', 'label' => __('Item condition', 'wc_simple_auctions'), 'options' => apply_filters('simple_auction_item_condition', $this->auction_item_condition)));
-                woocommerce_wp_select(array('id' => '_auction_type', 'label' => __('Auction type', 'wc_simple_auctions'), 'options' => apply_filters('simple_auction_type', $this->auction_types)));
+                woocommerce_wp_select(array('id' => '_auction_item_condition', 'label' => __('Item condition', 'wc_auction_software'), 'options' => apply_filters('simple_auction_item_condition', $this->auction_item_condition)));
+                woocommerce_wp_select(array('id' => '_auction_type', 'label' => __('Auction type', 'wc_auction_software'), 'options' => apply_filters('simple_auction_type', $this->auction_types)));
                 
                 $proxy =  in_array(get_post_meta($post->ID, '_auction_proxy', true), array( '0', 'yes')) ? get_post_meta($post->ID, '_auction_proxy', true) : get_option('simple_auctions_proxy_auction_on', 'no');
                 
-                woocommerce_wp_checkbox(array('value' => $proxy,'id' => '_auction_proxy', 'wrapper_class' => '', 'label' => __('Proxy bidding?', 'wc_simple_auctions'), 'description' => __('Enable proxy bidding', 'wc_simple_auctions'), 'desc_tip' => 'true'));
-                woocommerce_wp_checkbox(array('id' => '_auction_sealed', 'wrapper_class' => '', 'label' => __('Sealed Bid?', 'wc_simple_auctions'), 'description' => __('In this type of auction all bidders simultaneously submit sealed bids so that no bidder knows the bid of any other participant. The highest bidder pays the price they submitted. If two bids with same value are placed for auction the one which was placed first wins the auction.', 'wc_simple_auctions'), 'desc_tip' => 'true'));
+                woocommerce_wp_checkbox(array('value' => $proxy,'id' => '_auction_proxy', 'wrapper_class' => '', 'label' => __('Proxy bidding?', 'wc_auction_software'), 'description' => __('Enable proxy bidding', 'wc_auction_software'), 'desc_tip' => 'true'));
+                woocommerce_wp_checkbox(array('id' => '_auction_sealed', 'wrapper_class' => '', 'label' => __('Sealed Bid?', 'wc_auction_software'), 'description' => __('In this type of auction all bidders simultaneously submit sealed bids so that no bidder knows the bid of any other participant. The highest bidder pays the price they submitted. If two bids with same value are placed for auction the one which was placed first wins the auction.', 'wc_auction_software'), 'desc_tip' => 'true'));
                 woocommerce_wp_text_input(
                     array(
                     'id' => '_auction_start_price',
                     'class' => 'wc_input_price short',
-                    'label' => __('Start Price', 'wc_simple_auctions') . ' (' . get_woocommerce_currency_symbol() . ')',
+                    'label' => __('Start Price', 'wc_auction_software') . ' (' . get_woocommerce_currency_symbol() . ')',
                     'data_type' => 'price',
                     'custom_attributes' => array(
                     'step' => 'any',
@@ -784,7 +784,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 woocommerce_wp_text_input(
                     array(
                     'id' => '_auction_bid_increment',
-                    'class' => 'wc_input_price short', 'label' => __('Bid increment', 'wc_simple_auctions') . ' (' . get_woocommerce_currency_symbol() . ')',
+                    'class' => 'wc_input_price short', 'label' => __('Bid increment', 'wc_auction_software') . ' (' . get_woocommerce_currency_symbol() . ')',
                     'data_type' => 'price',
                     'custom_attributes' => array(
                     'step' => 'any',
@@ -795,23 +795,23 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     array(
                     'id' => '_auction_reserved_price',
                     'class' => 'wc_input_price short',
-                    'label' => __('Reserve price', 'wc_simple_auctions') . ' (' . get_woocommerce_currency_symbol() . ')',
+                    'label' => __('Reserve price', 'wc_auction_software') . ' (' . get_woocommerce_currency_symbol() . ')',
                     'data_type' => 'price',
                     'custom_attributes' => array(
                     'step' => 'any',
                     'min' => '0',
                     ), 'desc_tip' => 'true',
-                    'description' => __('A reserve price is the lowest price at which you are willing to sell your item. If you don’t want to sell your item below a certain price, you can set a reserve price. The amount of your reserve price is not disclosed to your bidders, but they will see that your auction has a reserve price and whether or not the reserve has been met. If a bidder does not meet that price, you are not obligated to sell your item. ', 'wc_simple_auctions'))
+                    'description' => __('A reserve price is the lowest price at which you are willing to sell your item. If you don’t want to sell your item below a certain price, you can set a reserve price. The amount of your reserve price is not disclosed to your bidders, but they will see that your auction has a reserve price and whether or not the reserve has been met. If a bidder does not meet that price, you are not obligated to sell your item. ', 'wc_auction_software'))
                 );
                 woocommerce_wp_text_input(
                     array(
                     'id' => '_regular_price',
                     'name' => '_regular_price',
                     'class' => 'wc_input_price short',
-                    'label' => __('Buy it now price', 'wc_simple_auctions') . ' (' . get_woocommerce_currency_symbol() . ')',
+                    'label' => __('Buy it now price', 'wc_auction_software') . ' (' . get_woocommerce_currency_symbol() . ')',
                     'data_type' => 'price',
                     'desc_tip' => 'true',
-                    'description' => __('Buy it now disappears when bid exceeds the Buy now price for normal auction, or is lower than reverse auction', 'wc_simple_auctions'),
+                    'description' => __('Buy it now disappears when bid exceeds the Buy now price for normal auction, or is lower than reverse auction', 'wc_auction_software'),
                     )
                 );
 
@@ -819,15 +819,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $auction_dates_to = ($date = get_post_meta($post->ID, '_auction_dates_to', true)) ? $date : '';
 
                 echo '	<p class="form-field auction_dates_fields">
-							<label for="_auction_dates_from">' . __('Auction Dates', 'wc_simple_auctions') . '</label>
-							<input type="text" class="short datetimepicker" name="_auction_dates_from" id="_auction_dates_from" value="' . $auction_dates_from . '" placeholder="' . _x('From&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_simple_auctions') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
-							<input type="text" class="short datetimepicker" name="_auction_dates_to" id="_auction_dates_to" value="' . $auction_dates_to . '" placeholder="' . _x('To&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_simple_auctions') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
+							<label for="_auction_dates_from">' . __('Auction Dates', 'wc_auction_software') . '</label>
+							<input type="text" class="short datetimepicker" name="_auction_dates_from" id="_auction_dates_from" value="' . $auction_dates_from . '" placeholder="' . _x('From&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_auction_software') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
+							<input type="text" class="short datetimepicker" name="_auction_dates_to" id="_auction_dates_to" value="' . $auction_dates_to . '" placeholder="' . _x('To&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_auction_software') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
 						</p>';
                 if ((method_exists($product, 'get_type') && $product->get_type() == 'auction') && $product->get_auction_closed() && !$product->get_auction_payed()) {
-                    echo '<p class="form-field relist_dates_fields"><a class="button relist" href="#" id="relistauction">' . __('Relist', 'wc_simple_auctions') . '</a></p>
-                           <p class="form-field relist_auction_dates_fields"> <label for="_relist_auction_dates_from">' . __('Relist Auction Dates', 'wc_simple_auctions') . '</label>
-							<input type="text" class="short datetimepicker" name="_relist_auction_dates_from" id="_relist_auction_dates_from" value="" placeholder="' . _x('From&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_simple_auctions') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
-							<input type="text" class="short datetimepicker" name="_relist_auction_dates_to" id="_relist_auction_dates_to" value="" placeholder="' . _x('To&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_simple_auctions') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
+                    echo '<p class="form-field relist_dates_fields"><a class="button relist" href="#" id="relistauction">' . __('Relist', 'wc_auction_software') . '</a></p>
+                           <p class="form-field relist_auction_dates_fields"> <label for="_relist_auction_dates_from">' . __('Relist Auction Dates', 'wc_auction_software') . '</label>
+							<input type="text" class="short datetimepicker" name="_relist_auction_dates_from" id="_relist_auction_dates_from" value="" placeholder="' . _x('From&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_auction_software') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
+							<input type="text" class="short datetimepicker" name="_relist_auction_dates_to" id="_relist_auction_dates_to" value="" placeholder="' . _x('To&hellip; YYYY-MM-DD HH:MM', 'placeholder', 'wc_auction_software') . '" maxlength="16" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])[ ](0[0-9]|1[0-9]|2[0-4]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])" />
                         </p>';
                 }
                 do_action('woocommerce_product_options_auction');
@@ -943,7 +943,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 // check if the custom field has a value
                 if (!empty($order_id)) {
                     $order = new WC_Order($order_id);
-                    $order->update_status('failed', __('Failed because off relisting', 'wc_simple_auctions'));
+                    $order->update_status('failed', __('Failed because off relisting', 'wc_auction_software'));
                     delete_post_meta($post_id, '_order_id');
                 }
 
@@ -1069,7 +1069,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     }
 
                 } else {
-                    wc_add_notice(__('Item is not for auction', 'wc_simple_auctions'), 'error');
+                    wc_add_notice(__('Item is not for auction', 'wc_auction_software'), 'error');
                     return;
                 }
             }
@@ -1106,7 +1106,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             exit;
                         }
                         if ($current_user->ID != $product_data->get_auction_current_bider()) {
-                            wc_add_notice(sprintf(__('You can not buy this item because you did not win the auction! ', 'wc_simple_auctions'), $product_data->get_title()), 'error');
+                            wc_add_notice(sprintf(__('You can not buy this item because you did not win the auction! ', 'wc_auction_software'), $product_data->get_title()), 'error');
                             return false;
                         }
                         WC()->cart->add_to_cart($product_id);
@@ -1174,7 +1174,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             function woocommerce_simple_auctions_order_column_auction($defaults) 
             {
-                $defaults['auction'] = "<img src='" . $this->plugin_url . 'images/auction.png' . "' alt='" . __('Auction', 'wc_simple_auctions') . "' />";
+                $defaults['auction'] = "<img src='" . $this->plugin_url . 'images/auction.png' . "' alt='" . __('Auction', 'wc_auction_software') . "' />";
                 return $defaults;
             }
             /**
@@ -1215,10 +1215,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             $class .= ' payed ';
                             $title .= ' payed ';
                         }
-                        echo "<img src='" . $this->plugin_url . 'images/auction-white.png' . "' title='" . sprintf(__('Auction %s', 'wc_simple_auctions'), $title) . "' class='$class' />";
+                        echo "<img src='" . $this->plugin_url . 'images/auction-white.png' . "' title='" . sprintf(__('Auction %s', 'wc_auction_software'), $title) . "' class='$class' />";
                     }
                     if (get_post_meta($post_ID, '_auction', true)) {
-                        echo "<img src='" . $this->plugin_url . 'images/auction.png' . "' title='" . sprintf(__('Auction %s', 'wc_simple_auctions'), $title) . "' class='order' />";
+                        echo "<img src='" . $this->plugin_url . 'images/auction.png' . "' title='" . sprintf(__('Auction %s', 'wc_auction_software'), $title) . "' class='order' />";
                     }
                 }
             }
@@ -1264,7 +1264,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             $title .= ' payed ';
                         }
 
-                        echo '<span class="auction-status '.$class.'" title="'.sprintf(__('Auction %s', 'wc_simple_auctions'), $title) .'" ></span>';
+                        echo '<span class="auction-status '.$class.'" title="'.sprintf(__('Auction %s', 'wc_auction_software'), $title) .'" ></span>';
                     }
 
                 }
@@ -1291,7 +1291,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     );
                     ?>
                     <select name="wsa_filter">
-                    <option value=""><?php _e('Auction filter By ', 'wc_simple_auctions');?></option>
+                    <option value=""><?php _e('Auction filter By ', 'wc_auction_software');?></option>
                 <?php
                                     $current_v = isset($_GET['wsa_filter']) ? $_GET['wsa_filter'] : '';
                 foreach ($values as $label => $value) {
@@ -1391,7 +1391,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             function add_setting_tab($tabs) 
             {
-                $tabs['simple_auctions'] = __('Auctions', 'wc_simple_auctions');
+                $tabs['simple_auctions'] = __('Auctions', 'wc_auction_software');
                 return $tabs;
             }
             /**
@@ -1423,64 +1423,64 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             function init_form_fields() 
             {
                 $woocommerce_settings['simple_auctions'] = array(
-                array('title' => __('Simple auction options', 'wc_simple_auctions'), 'type' => 'title', 'desc' => '', 'id' => 'simple_auction_options'),
+                array('title' => __('Simple auction options', 'wc_auction_software'), 'type' => 'title', 'desc' => '', 'id' => 'simple_auction_options'),
                 array(
-                'title' => __('Past auctions', 'wc_simple_auctions'),
-                'desc' => __('Show finished auctions.', 'wc_simple_auctions'),
+                'title' => __('Past auctions', 'wc_auction_software'),
+                'desc' => __('Show finished auctions.', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_finished_enabled',
                 'default' => 'no',
                 ),
                 array(
-                'title' => __('Future auctions', 'wc_simple_auctions'),
-                'desc' => __('Show auctions that did not start yet.', 'wc_simple_auctions'),
+                'title' => __('Future auctions', 'wc_auction_software'),
+                'desc' => __('Show auctions that did not start yet.', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_future_enabled',
                 'default' => 'yes',
                 ),
                 array(
-                'title' => __("Do not show auctions on shop page", 'wc_simple_auctions'),
-                'desc' => __('Do not mix auctions and regular products on shop page. Just show auctions on the auction page (auctions base page)', 'wc_simple_auctions'),
+                'title' => __("Do not show auctions on shop page", 'wc_auction_software'),
+                'desc' => __('Do not mix auctions and regular products on shop page. Just show auctions on the auction page (auctions base page)', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_dont_mix_shop',
                 'default' => 'yes',
                 ),
                 array(
-                'title' => __("Do not show auctions on product search page", 'wc_simple_auctions'),
-                'desc' => __('Do not mix auctions and regular products on product search page.', 'wc_simple_auctions'),
+                'title' => __("Do not show auctions on product search page", 'wc_auction_software'),
+                'desc' => __('Do not mix auctions and regular products on product search page.', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_dont_mix_search',
                 'default' => 'no',
                 ),
                 array(
-                'title' => __("Do not show auctions on product category page", 'wc_simple_auctions'),
-                'desc' => __('Do not mix auctions and regular products on product category page. Just show auctions on the auction page (auctions base page)', 'wc_simple_auctions'),
+                'title' => __("Do not show auctions on product category page", 'wc_auction_software'),
+                'desc' => __('Do not mix auctions and regular products on product category page. Just show auctions on the auction page (auctions base page)', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_dont_mix_cat',
                 'default' => 'yes',
                 ),
                 array(
-                'title' => __("Do not show auctions on product tag page", 'wc_simple_auctions'),
-                'desc' => __('Do not mix auctions and regular products on product tag page. Just show auctions on the auction page (auctions base page)', 'wc_simple_auctions'),
+                'title' => __("Do not show auctions on product tag page", 'wc_auction_software'),
+                'desc' => __('Do not mix auctions and regular products on product tag page. Just show auctions on the auction page (auctions base page)', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_dont_mix_tag',
                 'default' => 'yes',
                 ),
                 array(
-                'title' => __("Countdown format", 'wc_simple_auctions'),
-                'desc' => __("The format for the countdown display. Default is yowdHMS", 'wc_simple_auctions'),
+                'title' => __("Countdown format", 'wc_auction_software'),
+                'desc' => __("The format for the countdown display. Default is yowdHMS", 'wc_auction_software'),
                 'desc_tip' => __(
                     "Use the following characters (in order) to indicate which periods you want to display: 'Y' for years, 'O' for months, 'W' for weeks, 'D' for days, 'H' for hours, 'M' for minutes, 'S' for seconds.
 
-Use upper-case characters for mandatory periods, or the corresponding lower-case characters for optional periods, i.e. only display if non-zero. Once one optional period is shown, all the ones after that are also shown.", 'wc_simple_auctions'
+Use upper-case characters for mandatory periods, or the corresponding lower-case characters for optional periods, i.e. only display if non-zero. Once one optional period is shown, all the ones after that are also shown.", 'wc_auction_software'
                 ),
                 'type' => 'text',
                 'id' => 'simple_auctions_countdown_format',
                 'default' => 'yowdHMS',
                 ),
                 array(
-                'title' => __('Auctions Base Page', 'wc_simple_auctions'),
-                'desc' => __('Set the base page for your auctions - this is where your auction archive will be.', 'wc_simple_auctions'),
+                'title' => __('Auctions Base Page', 'wc_auction_software'),
+                'desc' => __('Set the base page for your auctions - this is where your auction archive will be.', 'wc_auction_software'),
                 'id' => 'woocommerce_auction_page_id',
                 'type' => 'single_select_page',
                 'default' => '',
@@ -1490,44 +1490,44 @@ Use upper-case characters for mandatory periods, or the corresponding lower-case
                 ),
 
                 array(
-                'title' => __("Use ajax bid check", 'wc_simple_auctions'),
-                'desc' => __('Enables / disables ajax current bid checker (refresher) for auction - updates current bid value without refreshing page (increases server load, disable for best performance)', 'wc_simple_auctions'),
+                'title' => __("Use ajax bid check", 'wc_auction_software'),
+                'desc' => __('Enables / disables ajax current bid checker (refresher) for auction - updates current bid value without refreshing page (increases server load, disable for best performance)', 'wc_auction_software'),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_live_check',
                 'default' => 'yes',
                 ),
                 array(
-                'title' => __("Ajax bid check interval", 'wc_simple_auctions'),
-                'desc' => __('Time between two ajax requests in seconds (bigger intervals means less load for server)', 'wc_simple_auctions'),
+                'title' => __("Ajax bid check interval", 'wc_auction_software'),
+                'desc' => __('Time between two ajax requests in seconds (bigger intervals means less load for server)', 'wc_auction_software'),
                 'type' => 'text',
                 'id' => 'simple_auctions_live_check_interval',
                 'default' => '1',
                 ),
                 array(
-                'title' => __("Allow highest bidder to outbid himself", 'wc_simple_auctions'),
-                //'desc' 			=> __( '', 'wc_simple_auctions' ),
+                'title' => __("Allow highest bidder to outbid himself", 'wc_auction_software'),
+                //'desc' 			=> __( '', 'wc_auction_software' ),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_curent_bidder_can_bid',
                 'default' => 'no',
                 ),
 
                 array(
-                'title' => __("Allow watchlists", 'wc_simple_auctions'),
-                //'desc' 				=> __( '', 'wc_simple_auctions' ),
+                'title' => __("Allow watchlists", 'wc_auction_software'),
+                //'desc' 				=> __( '', 'wc_auction_software' ),
                 'type' => 'checkbox',
                 'id' => 'simple_auctions_watchlists',
                 'default' => 'yes',
                 ),
                 array(
-                                            'title'             => __("Max bid amount", 'wc_simple_auctions'),
-                                            'desc'                => __("Maximum value for single bid. Default value is ", 'wc_simple_auctions').wc_price('999999999999999999.99'),
+                                            'title'             => __("Max bid amount", 'wc_auction_software'),
+                                            'desc'                => __("Maximum value for single bid. Default value is ", 'wc_auction_software').wc_price('999999999999999999.99'),
                                             'type'                 => 'number',
                                             'id'                => 'simple_auctions_max_bid_amount',
                                             'default'             => ''
                                         ),
                 array(
-                                            'title'             => __("Allow Buy It Now after bidding has started", 'wc_simple_auctions'),
-                                            'desc'                 => __('For auction-style listings with the Buy It Now option, you have the chance to purchase an item immediately, before bidding starts. After someone bids, the Buy It Now option disappears and bidding continues until the listing ends, with the item going to the highest bidder.', 'wc_simple_auctions'),
+                                            'title'             => __("Allow Buy It Now after bidding has started", 'wc_auction_software'),
+                                            'desc'                 => __('For auction-style listings with the Buy It Now option, you have the chance to purchase an item immediately, before bidding starts. After someone bids, the Buy It Now option disappears and bidding continues until the listing ends, with the item going to the highest bidder.', 'wc_auction_software'),
                                             'type'                 => 'checkbox',
                                             'id'                => 'simple_auctions_alow_buy_now',
                                             'default'             => 'yes'
@@ -1566,7 +1566,7 @@ Use upper-case characters for mandatory periods, or the corresponding lower-case
                 $product_data = wc_get_product($post->ID);
                 if ($product_data) {
                     if (method_exists($product_data, 'get_type') && $product_data->get_type() == 'auction') {
-                        add_meta_box('Auction', __('Auction', 'wc_simple_auctions'), array($this, 'woocommerce_simple_auctions_meta_callback'), 'product', 'normal');
+                        add_meta_box('Auction', __('Auction', 'wc_auction_software'), array($this, 'woocommerce_simple_auctions_meta_callback'), 'product', 'normal');
                     }
                 }
 
@@ -1582,38 +1582,38 @@ Use upper-case characters for mandatory periods, or the corresponding lower-case
 
                 global $woocommerce, $post;
                 $product_data = wc_get_product($post->ID);
-                $heading = esc_html(apply_filters('woocommerce_auction_history_heading', __('Auction History', 'wc_simple_auctions')));
+                $heading = esc_html(apply_filters('woocommerce_auction_history_heading', __('Auction History', 'wc_auction_software')));
             
 
                 ?>
                     <?php if (!empty($product_data->get_auction_relisted())) {?>
-                        <p><?php _e('Auction has been relisted on:', 'wc_simple_auctions')?> <?php echo $product_data->get_auction_relisted() ?></p>
+                        <p><?php _e('Auction has been relisted on:', 'wc_auction_software')?> <?php echo $product_data->get_auction_relisted() ?></p>
                     <?php 
 }?>
         <?php if (($product_data->is_closed() === true) and ($product_data->is_started() === true)) : ?>
-						<p><?php _e('Auction has finished', 'wc_simple_auctions')?></p>
+						<p><?php _e('Auction has finished', 'wc_auction_software')?></p>
         <?php if ($product_data->get_auction_fail_reason() == '1') {
             echo "<p>";
-            _e('Auction failed because there were no bids', 'wc_simple_auctions');
+            _e('Auction failed because there were no bids', 'wc_auction_software');
             echo "</p>";
 } elseif ($product_data->get_auction_fail_reason() == '2') {
     echo "<p class='reservefail'>";
-    _e('Auction failed because item did not make it to reserve price', 'wc_simple_auctions');
+    _e('Auction failed because item did not make it to reserve price', 'wc_auction_software');
     echo ' <a class="removereserve" href="#" data-postid="' . $post->ID . '">';
-    _e('Remove reserve price', 'wc_simple_auctions');
+    _e('Remove reserve price', 'wc_auction_software');
     echo ' </a>';
     echo "</p>";
 }
 if ($product_data->get_auction_closed() == '3') {?>
-						<p><?php _e('Product sold for buy now price', 'wc_simple_auctions')?>: <span><?php echo wc_price($product_data->get_regular_price()) ?></span></p>
+						<p><?php _e('Product sold for buy now price', 'wc_auction_software')?>: <span><?php echo wc_price($product_data->get_regular_price()) ?></span></p>
         <?php 
 } elseif ($product_data->get_auction_current_bider()) {
     ?>
-   <p><?php _e('Highest bidder was', 'wc_simple_auctions')?>: <span class="higestbider"><a href='<?php get_edit_user_link($product_data->get_auction_current_bider())?>'><?php echo get_userdata($product_data->get_auction_current_bider())->display_name ?></a></span></p>
-   <p><?php _e('Highest bid was', 'wc_simple_auctions')?>: <span class="higestbid" ><?php echo wc_price($product_data->get_curent_bid()) ?></span></p>
+   <p><?php _e('Highest bidder was', 'wc_auction_software')?>: <span class="higestbider"><a href='<?php get_edit_user_link($product_data->get_auction_current_bider())?>'><?php echo get_userdata($product_data->get_auction_current_bider())->display_name ?></a></span></p>
+   <p><?php _e('Highest bid was', 'wc_auction_software')?>: <span class="higestbid" ><?php echo wc_price($product_data->get_curent_bid()) ?></span></p>
 
         <?php if ($product_data->get_auction_payed()) {?>
-						<p><?php _e('Order has been paid, order ID is', 'wc_simple_auctions')?>: <span><a href='post.php?&action=edit&post=<?php echo $product_data->get_order_id() ?>'><?php echo $product_data->get_order_id() ?></a></span></p>
+						<p><?php _e('Order has been paid, order ID is', 'wc_auction_software')?>: <span><a href='post.php?&action=edit&post=<?php echo $product_data->get_order_id() ?>'><?php echo $product_data->get_order_id() ?></a></span></p>
         <?php 
 } elseif ($product_data->get_order_id()) {
                   $order_status_obj = wp_get_post_terms($product_data->get_order_id(), 'shop_order_status');
@@ -1626,7 +1626,7 @@ if ($product_data->get_auction_closed() == '3') {?>
     }
 
         ?>
-      <p><?php _e('Order has been made, order status is', 'wc_simple_auctions')?>: <a href='post.php?&action=edit&post=<?php echo $product_data->get_order_id() ?>'><?php echo $order_status ?></a><span>
+      <p><?php _e('Order has been made, order status is', 'wc_auction_software')?>: <a href='post.php?&action=edit&post=<?php echo $product_data->get_order_id() ?>'><?php echo $order_status ?></a><span>
         <?php 
 }?>
 						<p></p>
@@ -1635,10 +1635,10 @@ if ($product_data->get_auction_closed() == '3') {?>
             <?php if ($product_data->get_number_of_sent_mails()) {
                 $dates_of_sent_mail = get_post_meta($product_data->id, '_dates_of_sent_mails', false);
         ?>
-							<p><?php _e('Number of sent reminder emails', 'wc_simple_auctions')?>: <span> <?php echo $product_data->get_number_of_sent_mails() ?></span></p>
-							<p><?php _e('Last reminder mail was sent on', 'wc_simple_auctions')?>: <span> <?php echo date('Y-m-d', end($dates_of_sent_mail)) ?></span></p>
-							<p class="reminder-status"><?php _e('Reminder status', 'wc_simple_auctions')?>: <?php if ($product_data->get_stop_mails()) {?><span class="error"><?php _e('Stopped', 'wc_simple_auctions')?></span><?php 
-} else {?><span class="ok"><?php _e('Running', 'wc_simple_auctions')?></span><?php 
+							<p><?php _e('Number of sent reminder emails', 'wc_auction_software')?>: <span> <?php echo $product_data->get_number_of_sent_mails() ?></span></p>
+							<p><?php _e('Last reminder mail was sent on', 'wc_auction_software')?>: <span> <?php echo date('Y-m-d', end($dates_of_sent_mail)) ?></span></p>
+							<p class="reminder-status"><?php _e('Reminder status', 'wc_auction_software')?>: <?php if ($product_data->get_stop_mails()) {?><span class="error"><?php _e('Stopped', 'wc_auction_software')?></span><?php 
+} else {?><span class="ok"><?php _e('Running', 'wc_auction_software')?></span><?php 
 }?> </p>
         <?php 
 }?>
@@ -1647,9 +1647,9 @@ if ($product_data->get_auction_closed() == '3') {?>
         <?php if (($product_data->is_closed() === false) and ($product_data->is_started() === true)) : ?>
 
         <?php if ($product_data->get_auction_proxy()) {?>
-							<p><?php _e('This is proxy auction', 'wc_simple_auctions')?></p>
+							<p><?php _e('This is proxy auction', 'wc_auction_software')?></p>
         <?php if ($product_data->get_auction_max_bid() && $product_data->get_auction_max_current_bider()) {?>
-								<p><?php _e('Maximum bid is', 'wc_simple_auctions')?> <?php echo $product_data->get_auction_max_bid() ?> <?php _e('by', 'wc_simple_auctions')?> <a href='"<?php echo get_edit_user_link($product_data->get_auction_max_current_bider()) ?>"'><?php echo get_userdata($product_data->get_auction_max_current_bider())->display_name; ?></a>  </p>
+								<p><?php _e('Maximum bid is', 'wc_auction_software')?> <?php echo $product_data->get_auction_max_bid() ?> <?php _e('by', 'wc_auction_software')?> <a href='"<?php echo get_edit_user_link($product_data->get_auction_max_current_bider()) ?>"'><?php echo get_userdata($product_data->get_auction_max_current_bider())->display_name; ?></a>  </p>
         <?php 
 }?>
         <?php 
@@ -1666,11 +1666,11 @@ endif;?>
 
            <thead>
             <tr>
-             <th><?php _e('Date', 'wc_simple_auctions')?></th>
-             <th><?php _e('Bid', 'wc_simple_auctions')?></th>
-             <th><?php _e('User', 'wc_simple_auctions')?></th>
-             <th><?php _e('Auto', 'wc_simple_auctions')?></th>
-             <th class="actions"><?php _e('Actions', 'wc_simple_auctions')?></th>
+             <th><?php _e('Date', 'wc_auction_software')?></th>
+             <th><?php _e('Bid', 'wc_auction_software')?></th>
+             <th><?php _e('User', 'wc_auction_software')?></th>
+             <th><?php _e('Auto', 'wc_auction_software')?></th>
+             <th class="actions"><?php _e('Actions', 'wc_auction_software')?></th>
             </tr>
            </thead>
 
@@ -1681,7 +1681,7 @@ endif;?>
                     echo "<tr>";
                     echo '<td class="date">' . $product_data->get_auction_start_time() . '</td>';
                     echo '<td colspan="4"  class="relist">';
-                    echo __('Auction relisted', 'wc_simple_auctions');
+                    echo __('Auction relisted', 'wc_auction_software');
                     echo '</td>';
                     echo "</tr>";
                     $displayed_relist = true;
@@ -1692,12 +1692,12 @@ endif;?>
                 echo "<td class='bid'>$history_value->bid</td>";
                 echo "<td class='username'><a href='" . get_edit_user_link($history_value->userid) . "'>" . get_userdata($history_value->userid)->display_name . "</a></td>";
                 if ($history_value->proxy == 1) {
-                    echo " <td class='proxy'>" . __('Auto', 'wc_simple_auctions') . "</td>";
+                    echo " <td class='proxy'>" . __('Auto', 'wc_auction_software') . "</td>";
                 } else {
                     echo " <td class='proxy'></td>";
                 }
 
-                echo "<td class='action'> <a href='#' data-id='" . $history_value->id . "' data-postid='" . $post->ID . "'   >" . __('Delete', 'wc_simple_auctions') . "</a></td>";
+                echo "<td class='action'> <a href='#' data-id='" . $history_value->id . "' data-postid='" . $post->ID . "'   >" . __('Delete', 'wc_auction_software') . "</a></td>";
                 echo "</tr>";
 
 }?>
@@ -1707,13 +1707,13 @@ endif;?>
             <?php if ($product_data->is_started() === true) {
                 echo '<td class="date">' . $product_data->get_auction_start_time() . '</td>';
                 echo '<td colspan="4"  class="started">';
-                echo apply_filters('auction_history_started_text', __('Auction started', 'wc_simple_auctions'), $product_data);
+                echo apply_filters('auction_history_started_text', __('Auction started', 'wc_auction_software'), $product_data);
                 echo '</td>';
 
 } else {
        echo '<td  class="date">' . $product_data->get_auction_start_time() . '</td>';
        echo '<td colspan="4"  class="starting">';
-       echo apply_filters('auction_history_starting_text', __('Auction starting', 'wc_simple_auctions'), $product_data);
+       echo apply_filters('auction_history_starting_text', __('Auction starting', 'wc_auction_software'), $product_data);
        echo '</td>';
 }?>
                 </tr>
@@ -1732,7 +1732,7 @@ endif;?>
             {
                 global $woocommerce, $post;
 
-                add_meta_box('Automatic_relist_auction', __('Automatic relist auction', 'wc_simple_auctions'), array($this, 'woocommerce_simple_auctions_automatic_relist_callback'), 'product', 'normal');
+                add_meta_box('Automatic_relist_auction', __('Automatic relist auction', 'wc_auction_software'), array($this, 'woocommerce_simple_auctions_automatic_relist_callback'), 'product', 'normal');
 
             }
             /**
@@ -1745,23 +1745,23 @@ endif;?>
 
                 global $woocommerce, $post;
                 $product_data = wc_get_product($post->ID);
-                $heading = esc_html(apply_filters('woocommerce_auction_history_heading', __('Auction automatic relist', 'wc_simple_auctions')));
+                $heading = esc_html(apply_filters('woocommerce_auction_history_heading', __('Auction automatic relist', 'wc_auction_software')));
                 echo '<div class="woocommerce_options_panel ">';
-                woocommerce_wp_checkbox(array('id' => '_auction_automatic_relist', 'wrapper_class' => '', 'label' => __('Automatic relist auction', 'wc_simple_auctions'), 'description' => __('Enable automatic relisting', 'wc_simple_auctions')));
+                woocommerce_wp_checkbox(array('id' => '_auction_automatic_relist', 'wrapper_class' => '', 'label' => __('Automatic relist auction', 'wc_auction_software'), 'description' => __('Enable automatic relisting', 'wc_auction_software')));
                 woocommerce_wp_text_input(
-                    array('id' => '_auction_relist_fail_time', 'class' => 'wc_input_price short', 'label' => __('Relist if fail after n hours', 'wc_simple_auctions'), 'type' => 'number', 'custom_attributes' => array(
+                    array('id' => '_auction_relist_fail_time', 'class' => 'wc_input_price short', 'label' => __('Relist if fail after n hours', 'wc_auction_software'), 'type' => 'number', 'custom_attributes' => array(
                     'step' => 'any',
                     'min' => '0',
                     ))
                 );
                 woocommerce_wp_text_input(
-                    array('id' => '_auction_relist_not_paid_time', 'class' => 'wc_input_price short', 'label' => __('Relist if not paid after n hours', 'wc_simple_auctions'), 'type' => 'number', 'custom_attributes' => array(
+                    array('id' => '_auction_relist_not_paid_time', 'class' => 'wc_input_price short', 'label' => __('Relist if not paid after n hours', 'wc_auction_software'), 'type' => 'number', 'custom_attributes' => array(
                     'step' => 'any',
                     'min' => '0',
                     ))
                 );
                 woocommerce_wp_text_input(
-                    array('id' => '_auction_relist_duration', 'class' => 'wc_input_price short', 'label' => __('Relist auction duration in h', 'wc_simple_auctions'), 'type' => 'number', 'custom_attributes' => array(
+                    array('id' => '_auction_relist_duration', 'class' => 'wc_input_price short', 'label' => __('Relist auction duration in h', 'wc_auction_software'), 'type' => 'number', 'custom_attributes' => array(
                     'step' => 'any',
                     'min' => '0',
                     ))
@@ -2521,17 +2521,17 @@ endif;?>
                             if ($product_data->is_reserved()) {
                                 if (!$product_data->is_reserve_met()) {
 
-                                        _e("Reserve price has not been met", 'wc_simple_auctions');
+                                        _e("Reserve price has not been met", 'wc_auction_software');
                                         die();
                                 }
                             }
                             if ($product_data->get_auction_current_bider()) {
                                     echo "<div>";
-                                    printf(__("Winning bid is %s by %s.", 'wc_simple_auctions'), wc_price($product_data->get_curent_bid()), get_userdata($product_data->get_auction_current_bider())->display_name);
+                                    printf(__("Winning bid is %s by %s.", 'wc_auction_software'), wc_price($product_data->get_curent_bid()), get_userdata($product_data->get_auction_current_bider())->display_name);
                                     echo "</div>";
                             } else {
                                     echo "<div>";
-                                    _e("There were no bids for this auction.", 'wc_simple_auctions');
+                                    _e("There were no bids for this auction.", 'wc_auction_software');
                                         echo "</div>";
                                     die();
                             }
@@ -2541,11 +2541,11 @@ endif;?>
 
                         echo "<div>";
                         if (isset($_POST["future"]) && $_POST["future"] == 'true') {
-                                printf(__("Auction has started please refresh page.", 'wc_simple_auctions'));
+                                printf(__("Auction has started please refresh page.", 'wc_auction_software'));
                         } elseif (isset($_POST["future"]) && $_POST["future"] == 'false') {
-                            printf(__("Auction has finished please refresh page.", 'wc_simple_auctions'));
+                            printf(__("Auction has finished please refresh page.", 'wc_auction_software'));
                         } else {
-                             printf(__("Please refresh page.", 'wc_simple_auctions'));
+                             printf(__("Please refresh page.", 'wc_auction_software'));
                         }
 
                         echo "</div>";
@@ -2591,7 +2591,7 @@ endif;?>
                 } else {
 
                     echo "<p>";
-                    printf(__('Sorry, you must be logged in to add auction to watchlist. <a href="%s" class="button">Login &rarr;</a>', 'wc_simple_auctions'), get_permalink(wc_get_page_id('myaccount')));
+                    printf(__('Sorry, you must be logged in to add auction to watchlist. <a href="%s" class="button">Login &rarr;</a>', 'wc_auction_software'), get_permalink(wc_get_page_id('myaccount')));
                     echo "</p>";
                 }
 
@@ -2626,9 +2626,9 @@ endif;?>
                                     $return[$key]['curent_bider'] = $product_data->get_auction_current_bider();
                                     if ($product_data->is_reserved() === true) {
                                         if ($product_data->is_reserve_met() === false) {
-                                            $return[$key]['reserve'] = apply_filters('reserve_bid_text', __("Reserve price has not been met", 'wc_simple_auctions'));
+                                            $return[$key]['reserve'] = apply_filters('reserve_bid_text', __("Reserve price has not been met", 'wc_auction_software'));
                                         } elseif ($product_data->is_reserve_met() === true) {
-                                            $return[$key]['reserve'] = apply_filters('reserve_met_bid_text', __("Reserve price has been met", 'wc_simple_auctions'));
+                                            $return[$key]['reserve'] = apply_filters('reserve_met_bid_text', __("Reserve price has been met", 'wc_auction_software'));
                                         }
 
                                     }
@@ -2641,9 +2641,9 @@ endif;?>
                                         $return[$key]['activity'] = $product_data->auction_history_last($key);
                                         if ($product_data->is_reserved() === true) {
                                             if ($product_data->is_reserve_met() === false) {
-                                                $return[$key]['reserve'] = apply_filters('reserve_bid_text', __("Reserve price has not been met", 'wc_simple_auctions'));
+                                                $return[$key]['reserve'] = apply_filters('reserve_bid_text', __("Reserve price has not been met", 'wc_auction_software'));
                                             } elseif ($product_data->is_reserve_met() === true) {
-                                                $return[$key]['reserve'] = apply_filters('reserve_met_bid_text', __("Reserve price has been met", 'wc_simple_auctions'));
+                                                $return[$key]['reserve'] = apply_filters('reserve_met_bid_text', __("Reserve price has been met", 'wc_auction_software'));
                                             }
 
                                         }
@@ -2811,7 +2811,7 @@ endif;?>
                                     delete_post_meta($post_id, '_auction_reserved_price');
                                     delete_post_meta($post_id, '_auction_closed');
                                     delete_post_meta($post_id, '_auction_fail_reason');
-                                    $return['succes'] = __('Reserve price removed! Please refresh page.', 'wc_simple_auctions');
+                                    $return['succes'] = __('Reserve price removed! Please refresh page.', 'wc_auction_software');
                                 if (isset($return)) {
                                         wp_send_json($return);
                                 }
@@ -2821,11 +2821,11 @@ endif;?>
                         }
 
                     } else {
-                            $return['error'] = __('Auction is still active!', 'wc_simple_auctions');
+                            $return['error'] = __('Auction is still active!', 'wc_auction_software');
                     }
 
                 }
-                $return['error'] = __('Reserve price not removed', 'wc_simple_auctions');
+                $return['error'] = __('Reserve price not removed', 'wc_auction_software');
                 if (isset($return)) {
                         wp_send_json($return);
                 }
@@ -3220,7 +3220,7 @@ endif;?>
                 add_screen_option($option, $args);
             }
             
-            function wc_simple_auctions_set_option($status, $option, $value) 
+            function wc_auction_software_set_option($status, $option, $value) 
             {
                 if ('logs_per_page' == $option) {
                     return $value;
@@ -3239,7 +3239,7 @@ endif;?>
             public function create_admin_page() 
             {
 
-                            printf('<div class="wrap" id="wpse-list-table"><h2>%s</h2>', __('Auction activity', 'wc_simple_auctions'));
+                            printf('<div class="wrap" id="wpse-list-table"><h2>%s</h2>', __('Auction activity', 'wc_auction_software'));
                             echo '<form id="wpse-list-table-form" method="get">';
 
                             $wp_list_table = new wc_auction_software_List_Table();
@@ -3320,11 +3320,11 @@ endif;?>
                      return $data;
                 }
 
-                            $data['bid_asc'] = __('Sort by current bid: Low to high', 'wc_simple_auctions');
-                            $data['bid_desc'] = __('Sort by current bid: High to low', 'wc_simple_auctions');
-                            $data['auction_end'] = __('Sort auction by ending soonest', 'wc_simple_auctions');
-                            $data['auction_started'] = __('Sort auction by recently started', 'wc_simple_auctions');
-                            $data['auction_activity'] = __('Sort auction by most active', 'wc_simple_auctions');
+                            $data['bid_asc'] = __('Sort by current bid: Low to high', 'wc_auction_software');
+                            $data['bid_desc'] = __('Sort by current bid: High to low', 'wc_auction_software');
+                            $data['auction_end'] = __('Sort auction by ending soonest', 'wc_auction_software');
+                            $data['auction_started'] = __('Sort auction by recently started', 'wc_auction_software');
+                            $data['auction_activity'] = __('Sort auction by most active', 'wc_auction_software');
 
                             return $data;
             }
@@ -3562,7 +3562,7 @@ endif;?>
     {
         global $current_screen;
         if ($current_screen->parent_base == 'plugins') {
-            echo '<div class="error"><p>WooCommerce Simple Auctions ' . __('requires <a href="http://www.woothemes.com/woocommerce/" target="_blank">WooCommerce</a> to be activated in order to work. Please install and activate <a href="' . admin_url('plugin-install.php?tab=search&type=term&s=WooCommerce') . '" target="_blank">WooCommerce</a> first.', 'wc_simple_auctions') . '</p></div>';
+            echo '<div class="error"><p>WooCommerce Simple Auctions ' . __('requires <a href="http://www.woothemes.com/woocommerce/" target="_blank">WooCommerce</a> to be activated in order to work. Please install and activate <a href="' . admin_url('plugin-install.php?tab=search&type=term&s=WooCommerce') . '" target="_blank">WooCommerce</a> first.', 'wc_auction_software') . '</p></div>';
         }
     }
     $plugin = plugin_basename(__FILE__);

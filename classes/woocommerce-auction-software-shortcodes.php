@@ -541,7 +541,7 @@ endif;
             $watchlist = false;
             wp_reset_postdata();
             } else  {
-                echo '<p class="woocommerce-info">'.__('Please log in to see your auction watchlist', 'wc_simple_auctions').'.</p>';
+                echo '<p class="woocommerce-info">'.__('Please log in to see your auction watchlist', 'wc_auction_software').'.</p>';
             }
 
             return '<div class="woocommerce">' . ob_get_clean() . '</div>';
@@ -580,10 +580,10 @@ endif;
 
                 echo '<table class="my_auctions_activity">';
                 echo '<tr>';
-                echo '<th>'.__('Date', 'wc_simple_auctions').'</th>';
-                echo '<th>'.__('Auction', 'wc_simple_auctions').'</th>';
-                echo '<th>'.__('Bid', 'wc_simple_auctions').'</th>';
-                echo '<th>'.__('Status', 'wc_simple_auctions').'</th>';
+                echo '<th>'.__('Date', 'wc_auction_software').'</th>';
+                echo '<th>'.__('Auction', 'wc_auction_software').'</th>';
+                echo '<th>'.__('Bid', 'wc_auction_software').'</th>';
+                echo '<th>'.__('Status', 'wc_auction_software').'</th>';
                 echo '</tr>';
 
                 foreach ($useractivity as $key => $value) {
@@ -612,7 +612,7 @@ endif;
                 }
                 echo '</table>';
             } else  {
-                echo '<div class="woocommerce"><p class="woocommerce-info">'.__('Please log in to see your auctions activity.', 'wc_simple_auctions').'</p></div>';
+                echo '<div class="woocommerce"><p class="woocommerce-info">'.__('Please log in to see your auctions activity.', 'wc_auction_software').'</p></div>';
             }
         }
 
@@ -656,7 +656,7 @@ endif;
                 ?>
 
              <div class="simple-auctions active-auctions clearfix">
-              <h2><?php _e('All user auctions', 'wc_simple_auctions'); ?></h2>
+              <h2><?php _e('All user auctions', 'wc_auction_software'); ?></h2>
 
         <?php
 
@@ -697,7 +697,7 @@ endif;
                     woocommerce_product_loop_end();
 
                 } else {
-                    _e("You are not participating in auction.", "wc_simple_auctions");
+                    _e("You are not participating in auction.", "wc_auction_software");
                 }
 
                 wp_reset_postdata();

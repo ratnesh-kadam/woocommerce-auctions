@@ -12,7 +12,7 @@ $user_info = get_userdata($product_data->auction_win);
 
 echo $email_heading . "\n\n";
 
-printf(__("The auction for %s finished. Winning bid is %s ", 'wc_simple_auctions'), $product_data->get_title(), wc_price($product_data->get_curent_bid()));  
+printf(__("The auction for %s finished. Winning bid is %s ", 'wc_auction_software'), $product_data->get_title(), wc_price($product_data->get_curent_bid()));  
 echo "\n\n";
 echo get_permalink($product_id);
 echo "\n\n";

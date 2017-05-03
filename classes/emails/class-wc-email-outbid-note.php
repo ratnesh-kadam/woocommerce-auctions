@@ -51,15 +51,15 @@ class WC_Email_SA_Outbid_Note extends WC_Email
         
 
         $this->id                 = 'outbid_note';
-        $this->title             = __('Outbid note', 'wc_simple_auctions');
-        $this->description        = __('Outbid emails are sent when your users bid has been outbid.', 'wc_simple_auctions');
+        $this->title             = __('Outbid note', 'wc_auction_software');
+        $this->description        = __('Outbid emails are sent when your users bid has been outbid.', 'wc_auction_software');
 
         $this->template_html     = 'emails/outbid.php';
         $this->template_plain     = 'emails/plain/outbid.php';
         $this->template_base    = $woocommerce_auctions->plugin_path. 'templates/';
 
-        $this->subject             = __('Outbid item on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('You have been outbid', 'wc_simple_auctions');
+        $this->subject             = __('Outbid item on {blogname}', 'wc_auction_software');
+        $this->heading          = __('You have been outbid', 'wc_auction_software');
 
         // Triggers
          

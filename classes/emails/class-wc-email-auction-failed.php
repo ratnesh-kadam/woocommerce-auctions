@@ -42,15 +42,15 @@ class WC_Email_SA_Auction_Failed extends WC_Email
         global $woocommerce_auctions;
         
         $this->id                 = 'auction_fail';
-        $this->title             = __('Auction Fail', 'wc_simple_auctions');
-        $this->description        = __('Auction Fail emails are sent when auction fails.', 'wc_simple_auctions');
+        $this->title             = __('Auction Fail', 'wc_auction_software');
+        $this->description        = __('Auction Fail emails are sent when auction fails.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_fail.php';
         $this->template_plain     = 'emails/plain/auction_fail.php';
         $this->template_base    = $woocommerce_auctions->plugin_path.  'templates/';
 
-        $this->subject             = __('Auction Failed on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('No interest in this auction!', 'wc_simple_auctions');
+        $this->subject             = __('Auction Failed on {blogname}', 'wc_auction_software');
+        $this->heading          = __('No interest in this auction!', 'wc_auction_software');
 
         // Triggers
         //die(); 

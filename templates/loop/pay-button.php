@@ -2,7 +2,7 @@
 /**
  * Loop Add to Cart
  *
- * @author  WooThemes
+ * @author  WPEka
  * @package WooCommerce/Templates
  * @version 1.0.0
  */
@@ -15,7 +15,7 @@ if (method_exists($product, 'get_type') && $product->get_type() == 'auction' ) :
 
     if ($user_id == $product->get_auction_current_bider() && $product->get_auction_closed() == '2' && !$product->get_auction_payed() ) : ?>
 
-     <a href="<?php echo apply_filters('woocommerce_simple_auction_pay_now_button', esc_attr(add_query_arg("pay-auction", $product->get_id(), simple_auction_get_checkout_url()))); ?>" class="button"><?php  _e('Pay Now', 'wc_simple_auctions'); ?></a>
+     <a href="<?php echo apply_filters('woocommerce_simple_auction_pay_now_button', esc_attr(add_query_arg("pay-auction", $product->get_id(), simple_auction_get_checkout_url()))); ?>" class="button"><?php  _e('Pay Now', 'wc_auction_software'); ?></a>
 
     <?php 
     endif; ?>

@@ -93,7 +93,7 @@ class WCA_Query extends WC_Query {
 
 		switch ( $endpoint ) {
 			case 'auctions':
-				$title = __( 'Auctions', 'wc_simple_auctions' );
+				$title = __( 'Auctions', 'wc_auction_software' );
 				break;
 			default:
 				$title = '';
@@ -111,9 +111,9 @@ class WCA_Query extends WC_Query {
 	public function add_menu_items( $menu_items ) {
                 // Add our menu item after the Orders tab if it exists, otherwise just add it to the end
 		if ( array_key_exists( 'orders', $menu_items ) ) {
-			$menu_items = $this->wca_array_insert_after( 'orders', $menu_items, 'auctions', __( 'Auctions', 'wc_simple_auctions' ) );
+			$menu_items = $this->wca_array_insert_after( 'orders', $menu_items, 'auctions', __( 'Auctions', 'wc_auction_software' ) );
             	} else {
-			$menu_items['auctions'] = __( 'Add Auction', 'wc_simple_auctions' );
+			$menu_items['auctions'] = __( 'Add Auction', 'wc_auction_software' );
             	}
 		return $menu_items;
 	}

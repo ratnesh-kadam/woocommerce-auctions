@@ -46,15 +46,15 @@ class WC_Email_SA_Auction_Finished extends WC_Email
         global $woocommerce_auctions;
         
         $this->id                 = 'auction_finished';
-        $this->title             = __('Auction Finish', 'wc_simple_auctions');
-        $this->description        = __('Auction finish emails are sent to admin when auction finish.', 'wc_simple_auctions');
+        $this->title             = __('Auction Finish', 'wc_auction_software');
+        $this->description        = __('Auction finish emails are sent to admin when auction finish.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_finish.php';
         $this->template_plain     = 'emails/plain/auction_finish.php';
         $this->template_base    = $woocommerce_auctions->plugin_path.  'templates/';
 
-        $this->subject             = __('Auction Finished on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('Auction Finished!', 'wc_simple_auctions');
+        $this->subject             = __('Auction Finished on {blogname}', 'wc_auction_software');
+        $this->heading          = __('Auction Finished!', 'wc_auction_software');
 
         // Triggers
         //die(); 

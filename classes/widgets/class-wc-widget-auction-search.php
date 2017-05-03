@@ -18,14 +18,14 @@ class WC_Widget_Auction_Search extends WC_Widget
     public function __construct() 
     {
         $this->widget_cssclass    = 'woocommerce widget_auction_search';
-        $this->widget_description = __('A Search box for auctions only.', 'wc_simple_auctions');
+        $this->widget_description = __('A Search box for auctions only.', 'wc_auction_software');
         $this->widget_id          = 'woocommerce_auction_search';
-        $this->widget_name        = __('WooCommerce Auction Search', 'wc_simple_auctions');
+        $this->widget_name        = __('WooCommerce Auction Search', 'wc_auction_software');
         $this->settings           = array(
         'title'  => array(
         'type'  => 'text',
         'std'   => '',
-        'label' => __('Title', 'wc_simple_auctions')
+        'label' => __('Title', 'wc_auction_software')
         )
         );
 

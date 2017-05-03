@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wc_simple_auctions\n"
+"Project-Id-Version: wc_auction_software\n"
 "POT-Creation-Date: 2017-03-03 11:30+0100\n"
 "PO-Revision-Date: 2017-03-03 11:30+0100\n"
 "Last-Translator: mlajo <mlajo@mlajo.com>\n"

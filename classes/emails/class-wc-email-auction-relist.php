@@ -42,15 +42,15 @@ class WC_Email_SA_Auction_Relist extends WC_Email
         global $woocommerce_auctions;
         
         $this->id                 = 'auction_relist';
-        $this->title             = __('Auction relist admin notice', 'wc_simple_auctions');
-        $this->description        = __('Auction relist admin emails are sent to admin when auction is relisted.', 'wc_simple_auctions');
+        $this->title             = __('Auction relist admin notice', 'wc_auction_software');
+        $this->description        = __('Auction relist admin emails are sent to admin when auction is relisted.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_relist_admin.php';
         $this->template_plain     = 'emails/plain/auction_relist_admin.php';
         $this->template_base    = $woocommerce_auctions->plugin_path.  'templates/';
 
-        $this->subject             = __('Auction Relisted on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('Auction relisted!', 'wc_simple_auctions');
+        $this->subject             = __('Auction Relisted on {blogname}', 'wc_auction_software');
+        $this->heading          = __('Auction relisted!', 'wc_auction_software');
 
         // Triggers
         //die(); 

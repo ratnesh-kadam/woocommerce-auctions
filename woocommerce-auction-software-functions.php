@@ -20,18 +20,18 @@ function woocommerce__simple_auctions_place_bid_message( $product_id )
 
     if($current_user->ID == $product_data->get_auction_current_bider()) {
         if(!$product_data->is_reserve_met()) {
-            $message = sprintf(__('Successfully placed bid for &quot;%s&quot; but is does not meet the reserve price!', 'wc_simple_auctions'), $product_data -> get_title());
+            $message = sprintf(__('Successfully placed bid for &quot;%s&quot; but is does not meet the reserve price!', 'wc_auction_software'), $product_data -> get_title());
         } else{
 
             if($product_data->get_auction_proxy() && $product_data->get_auction_max_bid()) {
-                $message = sprintf(__('Successfully placed bid for &quot;%s&quot;! Your max bid is %s.', 'wc_simple_auctions'), $product_data -> get_title(), wc_price($product_data->get_auction_max_bid()));
+                $message = sprintf(__('Successfully placed bid for &quot;%s&quot;! Your max bid is %s.', 'wc_auction_software'), $product_data -> get_title(), wc_price($product_data->get_auction_max_bid()));
             }else{
-                $message = sprintf(__('Successfully placed bid for &quot;%s&quot;!', 'wc_simple_auctions'), $product_data -> get_title());
+                $message = sprintf(__('Successfully placed bid for &quot;%s&quot;!', 'wc_auction_software'), $product_data -> get_title());
             }
         }    
         
     } else {
-        $message = sprintf(__("Your bid was successful but you've been outbid again for &quot;%s&quot;!", 'wc_simple_auctions'), $product_data -> get_title());    
+        $message = sprintf(__("Your bid was successful but you've been outbid again for &quot;%s&quot;!", 'wc_auction_software'), $product_data -> get_title());    
     }    
 
     wc_add_notice(apply_filters('woocommerce_simple_auctions_placed_bid_message', $message));
@@ -65,7 +65,7 @@ function woocommerce__simple_auctions_winning_bid_message( $product_id )
                     return false; 
     }
 
-    $message =   __('No need to bid. Your bid is winning! ', 'wc_simple_auctions');
+    $message =   __('No need to bid. Your bid is winning! ', 'wc_auction_software');
     if ($current_user->ID == $product->get_auction_current_bider() &&  wc_notice_count() == 0   ) {
         wc_add_notice(apply_filters('woocommerce_simple_auctions_winning_bid_message', $message));
     }    
@@ -126,13 +126,13 @@ if (! function_exists('woocommerce_auctions_ordering') ) {
             'woocommerce_auctions_orderby', array(
                                 'menu_order'       => __('Default sorting', 'woocommerce'),
                                 'date'             => __('Sort by newness', 'woocommerce'),
-                                'price'            => __('Sort by buynow price: low to high', 'wc_simple_auctions'),
-                                'price-desc'       => __('Sort by buynow price: high to low', 'wc_simple_auctions'),
-                                'bid_asc'          => __('Sort by current bid: Low to high', 'wc_simple_auctions'),
-                                'bid_desc'         => __('Sort by current bid: High to low', 'wc_simple_auctions'),
-                                'auction_end'      => __('Sort auction by ending soonest', 'wc_simple_auctions'),
-                                'auction_started'  => __('Sort auction by recently started', 'wc_simple_auctions'),
-                                'auction_activity' => __('Sort auction by most active', 'wc_simple_auctions'),
+                                'price'            => __('Sort by buynow price: low to high', 'wc_auction_software'),
+                                'price-desc'       => __('Sort by buynow price: high to low', 'wc_auction_software'),
+                                'bid_asc'          => __('Sort by current bid: Low to high', 'wc_auction_software'),
+                                'bid_desc'         => __('Sort by current bid: High to low', 'wc_auction_software'),
+                                'auction_end'      => __('Sort auction by ending soonest', 'wc_auction_software'),
+                                'auction_started'  => __('Sort auction by recently started', 'wc_auction_software'),
+                                'auction_activity' => __('Sort auction by most active', 'wc_auction_software'),
              ) 
         );
 

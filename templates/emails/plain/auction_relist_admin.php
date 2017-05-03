@@ -11,7 +11,7 @@ $product_data = wc_get_product($product_id);
 
 echo $email_heading . "\n\n";
 
-printf(__("Auction for %s has been relisted. Reason: %s", 'wc_simple_auctions'), $product_data->get_title(), $reason);  
+printf(__("Auction for %s has been relisted. Reason: %s", 'wc_auction_software'), $product_data->get_title(), $reason);  
 echo "\n\n";
 echo get_permalink($product_id);
 echo "\n\n";

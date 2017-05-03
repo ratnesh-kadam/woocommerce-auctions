@@ -32,7 +32,7 @@ if (! $product->is_purchasable() OR ! $product->is_sold_individually() OR ! $pro
 
     <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>" />
 
-    <button type="submit" class="single_add_to_cart_button button alt"><?php echo apply_filters('single_add_to_cart_text', sprintf(__('Buy now for %s', 'wc_simple_auctions'), wc_price($product->get_regular_price())), $product); ?></button>
+    <button type="submit" class="single_add_to_cart_button button alt"><?php echo apply_filters('single_add_to_cart_text', sprintf(__('Buy now for %s', 'wc_auction_software'), wc_price($product->get_regular_price())), $product); ?></button>
 
     <div>
         <input type="hidden" name="add-to-cart" value="<?php echo $product->get_id(); ?>" />

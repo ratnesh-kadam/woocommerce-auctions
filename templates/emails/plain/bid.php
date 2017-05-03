@@ -11,7 +11,7 @@ $product_data = wc_get_product($product_id);
 
 echo $email_heading . "\n\n";
 
-printf(__("Hi there. A bid was placed for %s . Bid: %s", 'wc_simple_auctions'), get_permalink($product_id), $product_data->get_title(), wc_price($product_data->get_curent_bid())); 
+printf(__("Hi there. A bid was placed for %s . Bid: %s", 'wc_auction_software'), get_permalink($product_id), $product_data->get_title(), wc_price($product_data->get_curent_bid())); 
 echo "\n\n";
 echo get_permalink($product_id);
 echo "\n\n";

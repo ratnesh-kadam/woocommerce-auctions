@@ -69,17 +69,17 @@ class WC_Bid
 
 
         if (!is_user_logged_in()) {
-            wc_add_notice(sprintf(__('Sorry, you must be logged in to place a bid. <a href="%s" class="button">Login &rarr;</a>', 'wc_simple_auctions'), get_permalink(wc_get_page_id('myaccount'))), 'error');
+            wc_add_notice(sprintf(__('Sorry, you must be logged in to place a bid. <a href="%s" class="button">Login &rarr;</a>', 'wc_auction_software'), get_permalink(wc_get_page_id('myaccount'))), 'error');
             return false;
         }
 
         if ($this->bid <= 0) {
-            wc_add_notice(sprintf(__('Bid must be greater than 0!', 'wc_simple_auctions'), get_permalink(wc_get_page_id('myaccount'))), 'error');
+            wc_add_notice(sprintf(__('Bid must be greater than 0!', 'wc_auction_software'), get_permalink(wc_get_page_id('myaccount'))), 'error');
             return false;
         }
         
         if ($this->bid >= $maximum_bid_amount) {
-            wc_add_notice(sprintf(__('Bid must be lower than %s !', 'wc_simple_auctions'), wc_price($maximum_bid_amount)), 'error');
+            wc_add_notice(sprintf(__('Bid must be lower than %s !', 'wc_auction_software'), wc_price($maximum_bid_amount)), 'error');
             return false;
         }
         
@@ -88,19 +88,19 @@ class WC_Bid
 
         // Check if product is_finished
         if ($product_data -> is_closed()) {
-            wc_add_notice(sprintf(__('Sorry, auction for &quot;%s&quot; is finished', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+            wc_add_notice(sprintf(__('Sorry, auction for &quot;%s&quot; is finished', 'wc_auction_software'), $product_data -> get_title()), 'error');
             return false;
         }
 
         // Check if product is_started
         if (!$product_data -> is_started()) {
-            wc_add_notice(sprintf(__('Sorry, the auction for &quot;%s&quot; has not started yet', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+            wc_add_notice(sprintf(__('Sorry, the auction for &quot;%s&quot; has not started yet', 'wc_auction_software'), $product_data -> get_title()), 'error');
             return false;
         }
 
         // Stock check - only check if we're managing stock and backorders are not allowed
         if (!$product_data -> is_in_stock()) {
-            wc_add_notice(sprintf(__('You cannot place a bid for &quot;%s&quot; because the product is out of stock.', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+            wc_add_notice(sprintf(__('You cannot place a bid for &quot;%s&quot; because the product is out of stock.', 'wc_auction_software'), $product_data -> get_title()), 'error');
             return false;
         }
 
@@ -114,7 +114,7 @@ class WC_Bid
 
         // Check if bid is needed
         if ($current_user->ID == $product_data->get_auction_current_bider() && get_option('simple_auctions_curent_bidder_can_bid') !== 'yes') {
-            wc_add_notice(sprintf(__('No need to bid. Your bid is winning! ', 'wc_simple_auctions'), $product_data->get_title()));
+            wc_add_notice(sprintf(__('No need to bid. Your bid is winning! ', 'wc_auction_software'), $product_data->get_title()));
             return false;
             
         }
@@ -124,12 +124,12 @@ class WC_Bid
             if ($product_data->get_auction_proxy() && $product_data->is_reserve_met() === true ) {
 
                 if ($this->bid <= (float)$product_data->get_auction_max_bid()) {
-                    wc_add_notice(sprintf(__('New max bid cannot be smaller than old max bid!', 'wc_simple_auctions'), $product_data -> get_title()));
+                    wc_add_notice(sprintf(__('New max bid cannot be smaller than old max bid!', 'wc_auction_software'), $product_data -> get_title()));
                     return false;
                 }
  
                 update_post_meta($product_id, '_auction_max_bid', $this->bid);
-                wc_add_notice(sprintf('You have changed your maximum bid successfully', 'wc_simple_auctions'));
+                wc_add_notice(sprintf('You have changed your maximum bid successfully', 'wc_auction_software'));
                 
                 return true;
             } 
@@ -199,7 +199,7 @@ class WC_Bid
                         update_post_meta($product_id, '_auction_bid_count', absint($product_data->get_auction_bid_count() + 2));
                         $this -> log_bid($product_id, $proxy_bid, get_userdata($product_data->get_auction_max_current_bider()), 1);
                         
-                        wc_add_notice(sprintf(__('You have been outbid', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+                        wc_add_notice(sprintf(__('You have been outbid', 'wc_auction_software'), $product_data -> get_title()), 'error');
                         
                     }
 
@@ -216,7 +216,7 @@ class WC_Bid
                 }
 
             } else {
-                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is smaller than the current bid. Your bid must be at least %s ', 'wc_simple_auctions'), $product_data -> get_title(), wc_price($product_data -> bid_value())));
+                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is smaller than the current bid. Your bid must be at least %s ', 'wc_auction_software'), $product_data -> get_title(), wc_price($product_data -> bid_value())));
                 return false;
             }
 
@@ -282,7 +282,7 @@ class WC_Bid
                         update_post_meta($product_id, '_auction_bid_count', absint($product_data->get_auction_bid_count() + 2));
                         $this -> log_bid($product_id, $proxy_bid, get_userdata($product_data->get_auction_max_current_bider()), 1);
                         
-                        wc_add_notice(sprintf(__('Your bid has been outbidded', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+                        wc_add_notice(sprintf(__('Your bid has been outbidded', 'wc_auction_software'), $product_data -> get_title()), 'error');
                         
                     }
 
@@ -298,11 +298,11 @@ class WC_Bid
                 }
 
             } else {
-                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is larger than the current bid', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is larger than the current bid', 'wc_auction_software'), $product_data -> get_title()), 'error');
                 return false;
             }
         } else {
-            wc_add_notice(sprintf(__('There was no bid', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+            wc_add_notice(sprintf(__('There was no bid', 'wc_auction_software'), $product_data -> get_title()), 'error');
             return false;
         }
 
@@ -345,7 +345,7 @@ class WC_Bid
         // Check if bid is needed
         if (($product_data -> is_user_biding($current_user->ID) > 0 ) && get_option('simple_auctions_curent_bidder_can_bid') !== 'yes') {
     
-            wc_add_notice(sprintf(__('You already placed bid for this auction! ', 'wc_simple_auctions'), $product_data -> get_title()));
+            wc_add_notice(sprintf(__('You already placed bid for this auction! ', 'wc_auction_software'), $product_data -> get_title()));
             return false;
                 
         }
@@ -354,10 +354,10 @@ class WC_Bid
         if (!empty($product_data->get_auction_start_price())) {
 
             if ($product_data->get_auction_start_price()  > $bid) {
-                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is smaller than the minimum bid. Your bid must be at least %s ', 'wc_simple_auctions'), $product_data -> get_title(), wc_price($product_data->get_auction_start_price())), 'error');
+                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is smaller than the minimum bid. Your bid must be at least %s ', 'wc_auction_software'), $product_data -> get_title(), wc_price($product_data->get_auction_start_price())), 'error');
                 return false;
             } elseif($product_data->get_auction_start_price()  > $bid) {
-                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is greater than the minimum bid. Your bid must be at most %s ', 'wc_simple_auctions'), $product_data -> get_title(), wc_price($product_data->get_auction_start_price())), 'error');
+                wc_add_notice(sprintf(__('Your bid for &quot;%s&quot; is greater than the minimum bid. Your bid must be at most %s ', 'wc_auction_software'), $product_data -> get_title(), wc_price($product_data->get_auction_start_price())), 'error');
                 return false;
             }
         }    
@@ -394,7 +394,7 @@ class WC_Bid
 
 
         } else{
-            wc_add_notice(sprintf(__('There was no bid', 'wc_simple_auctions'), $product_data -> get_title()), 'error');
+            wc_add_notice(sprintf(__('There was no bid', 'wc_auction_software'), $product_data -> get_title()), 'error');
             return false;
 
         }

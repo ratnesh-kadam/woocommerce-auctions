@@ -1,8 +1,8 @@
-		<?php
+<?php
   /**
  * Loop Add to Cart
  *
- * @author  WooThemes
+ * @author  WPEka
  * @package WooCommerce/Templates
  * @version 1.0.0
  */

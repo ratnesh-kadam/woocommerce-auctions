@@ -1,6 +1,6 @@
 <?php
 /**
- * Shortcode [woocommerce_simple_auctions_my_auctions]
+ * Shortcode [woocommerce_auction_software_my_auctions]
  */
 
 class WC_Shortcode_Auction_Software_My_Auctions
@@ -55,7 +55,7 @@ class WC_Shortcode_Auction_Software_My_Auctions
             
             ?>
          <div class="simple-auctions active-auctions clearfix">
-          <h2><?php _e('Active auctions', 'wc_simple_auctions'); ?></h2>
+          <h2><?php _e('Active auctions', 'wc_auction_software'); ?></h2>
 				
         <?php
                 
@@ -96,7 +96,7 @@ class WC_Shortcode_Auction_Software_My_Auctions
                     woocommerce_product_loop_end(); 
                         
                 } else {
-                    _e("You are not participating in auction.", "wc_simple_auctions");
+                    _e("You are not participating in auction.", "wc_auction_software");
                 }
     
                 wp_reset_postdata();
@@ -104,7 +104,7 @@ class WC_Shortcode_Auction_Software_My_Auctions
             ?>			
          </div>
          <div class="simple-auctions active-auctions clearfix">
-          <h2><?php _e('Won auctions', 'wc_simple_auctions'); ?></h2>
+          <h2><?php _e('Won auctions', 'wc_auction_software'); ?></h2>
 				
         <?php
                 $auction_closed_type[] = '2';
@@ -143,14 +143,14 @@ class WC_Shortcode_Auction_Software_My_Auctions
             endwhile;
                 woocommerce_product_loop_end(); 
         } else {
-            _e("You did not win any auctions yet.", "wc_simple_auctions");
+            _e("You did not win any auctions yet.", "wc_auction_software");
         }
     
           wp_reset_postdata();
           echo "</div>";
                         
         } else  {
-            echo '<div class="woocommerce"><p class="woocommerce-info">'.__('Please log in to see your auctions.', 'wc_simple_auctions').'</p></div>';
+            echo '<div class="woocommerce"><p class="woocommerce-info">'.__('Please log in to see your auctions.', 'wc_auction_software').'</p></div>';
         }
 
     }

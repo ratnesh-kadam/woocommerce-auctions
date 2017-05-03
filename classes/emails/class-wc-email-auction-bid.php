@@ -40,13 +40,13 @@ class WC_Email_SA_Bid extends WC_Email
         global $woocommerce_auctions;
 
         $this->id                 = 'bid_note';
-        $this->title             = __('Bid note', 'wc_simple_auctions');
-        $this->description        = __('Send bid email notification to admin when user(s) place a bid.', 'wc_simple_auctions');
+        $this->title             = __('Bid note', 'wc_auction_software');
+        $this->description        = __('Send bid email notification to admin when user(s) place a bid.', 'wc_auction_software');
         $this->template_html     = 'emails/bid.php';
         $this->template_plain     = 'emails/plain/bid.php';
         $this->template_base    = $woocommerce_auctions->plugin_path. 'templates/';
-        $this->subject             = __('Bid item on {site_title}', 'wc_simple_auctions');
-        $this->heading          = __('User placed a bid', 'wc_simple_auctions');
+        $this->subject             = __('Bid item on {site_title}', 'wc_auction_software');
+        $this->heading          = __('User placed a bid', 'wc_auction_software');
 
         // Triggers		 
         add_action('woocommerce_simple_auctions_place_bid_notification', array( $this, 'trigger' ));

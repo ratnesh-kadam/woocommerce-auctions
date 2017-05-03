@@ -49,15 +49,15 @@ class WC_Email_SA_Auction_Buy_Now extends WC_Email
         global $woocommerce_auctions;
 
         $this->id                 = 'auction_buy_now';
-        $this->title             = __('Auction Buy Now', 'wc_simple_auctions');
-        $this->description        = __('Auction buy now emails are sent to winning bidder when someone buys the item for the buy now price.', 'wc_simple_auctions');
+        $this->title             = __('Auction Buy Now', 'wc_auction_software');
+        $this->description        = __('Auction buy now emails are sent to winning bidder when someone buys the item for the buy now price.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_buy_now.php';
         $this->template_plain     = 'emails/plain/auction_buy_now.php';
         $this->template_base    =$woocommerce_auctions->plugin_path. 'templates/';
 
-        $this->subject             = __('Item sold on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('Item sold for buy now price', 'wc_simple_auctions');
+        $this->subject             = __('Item sold on {blogname}', 'wc_auction_software');
+        $this->heading          = __('Item sold for buy now price', 'wc_auction_software');
         
         $this->checkout_url     = simple_auction_get_checkout_url();
 

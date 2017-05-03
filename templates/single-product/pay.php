@@ -16,9 +16,9 @@ $user_id = get_current_user_id();
 if (($user_id == $product->get_auction_current_bider() && $product->get_auction_closed() == '2' && !$product->get_auction_payed() ) ) :
 ?>
 
-    <p><?php _e('Congratulations you have won this auction!', 'wc_simple_auctions') ?></p>
+    <p><?php _e('Congratulations you have won this auction!', 'wc_auction_software') ?></p>
     
-    <p><a href="<?php echo apply_filters('woocommerce_simple_auction_pay_now_button', esc_attr(add_query_arg("pay-auction", $product->get_id(), simple_auction_get_checkout_url()))); ?>" class="button"><?php _e('Pay Now', 'wc_simple_auctions') ?></a></p>
+    <p><a href="<?php echo apply_filters('woocommerce_simple_auction_pay_now_button', esc_attr(add_query_arg("pay-auction", $product->get_id(), simple_auction_get_checkout_url()))); ?>" class="button"><?php _e('Pay Now', 'wc_auction_software') ?></a></p>
 
 <?php 
 endif; ?>

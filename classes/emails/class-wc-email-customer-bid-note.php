@@ -46,15 +46,15 @@ class WC_Email_SA_Customerbid_Note extends WC_Email
         
 
         $this->id                 = 'customer_bid_note';
-        $this->title             = __('Customer bid notification', 'wc_simple_auctions');
-        $this->description        = __('Customer bid emails are sent to customer when customer places bid (confirmation email)', 'wc_simple_auctions');
+        $this->title             = __('Customer bid notification', 'wc_auction_software');
+        $this->description        = __('Customer bid emails are sent to customer when customer places bid (confirmation email)', 'wc_auction_software');
 
         $this->template_html     = 'emails/customerbid.php';
         $this->template_plain     = 'emails/plain/customerbid.php';
         $this->template_base    = $woocommerce_auctions->plugin_path. 'templates/';
 
-        $this->subject             = __('You have placed bid on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('You have placed bid on {blogname}', 'wc_simple_auctions');
+        $this->subject             = __('You have placed bid on {blogname}', 'wc_auction_software');
+        $this->heading          = __('You have placed bid on {blogname}', 'wc_auction_software');
 
 
         $this->proxy            = $this->get_option('proxy');
@@ -177,7 +177,7 @@ class WC_Email_SA_Customerbid_Note extends WC_Email
         'default'         => 'yes'
         ),
         'proxy' => array(
-        'title'         => __('Enable/Disable  sending "bid notification" email for proxy (auto) bidding', 'wc_simple_auctions'),
+        'title'         => __('Enable/Disable  sending "bid notification" email for proxy (auto) bidding', 'wc_auction_software'),
         'type'             => 'checkbox',
         'label'         => __('Enable this email notification', 'woocommerce'),
         'default'         => 'yes'

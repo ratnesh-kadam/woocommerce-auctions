@@ -48,16 +48,16 @@ class WC_Email_SA_Auction_Reminde_to_pay extends WC_Email
         global $woocommerce_auctions;
 
         $this->id                 = 'remind_to_pay';
-        $this->title             = __('Reminder to Pay', 'wc_simple_auctions');
-        $this->description        = __('Reminder for the customer that won the auction to pay.', 'wc_simple_auctions');
+        $this->title             = __('Reminder to Pay', 'wc_auction_software');
+        $this->description        = __('Reminder for the customer that won the auction to pay.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_remind_to_pay.php';
         $this->template_plain     = 'emails/plain/auction_remind_to_pay.php';
         $this->template_base    = $woocommerce_auctions->plugin_path.  'templates/';
         
 
-        $this->subject             = __('Payment reminder won on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('Reminder for you to pay the auction that you won.', 'wc_simple_auctions');
+        $this->subject             = __('Payment reminder won on {blogname}', 'wc_auction_software');
+        $this->heading          = __('Reminder for you to pay the auction that you won.', 'wc_auction_software');
         
         $this->interval            = '7';
         $this->stopsending      = '5';

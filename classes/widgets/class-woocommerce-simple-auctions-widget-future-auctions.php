@@ -28,9 +28,9 @@ class WC_SA_Widget_Future_Auctions extends WP_Widget
 
         /* Widget variable settings. */
         $this->woo_widget_cssclass = 'woocommerce widget__future_auctions';
-        $this->woo_widget_description = __('Display a list of your future auctions on your site.', 'wc_simple_auctions');
+        $this->woo_widget_description = __('Display a list of your future auctions on your site.', 'wc_auction_software');
         $this->woo_widget_idbase = 'woocommerce_future_auctions';
-        $this->woo_widget_name = __('WooCommerce Future Auctions', 'wc_simple_auctions');
+        $this->woo_widget_name = __('WooCommerce Future Auctions', 'wc_auction_software');
 
         /* Widget settings. */
         $widget_ops = array( 'classname' => $this->woo_widget_cssclass, 'description' => $this->woo_widget_description );
@@ -77,7 +77,7 @@ class WC_SA_Widget_Future_Auctions extends WP_Widget
         ob_start();
         extract($args);
 
-        $title = apply_filters('widget_title', empty($instance['title']) ? __('Future Auctions', 'wc_simple_auctions') : $instance['title'], $instance, $this->id_base);
+        $title = apply_filters('widget_title', empty($instance['title']) ? __('Future Auctions', 'wc_auction_software') : $instance['title'], $instance, $this->id_base);
         if (!$number = (int) $instance['number'] ) {
             $number = 10; 
         }
@@ -122,11 +122,11 @@ class WC_SA_Widget_Future_Auctions extends WP_Widget
                 
                 global $product;
                 $time = '';
-                $timetext = __('Time left', 'wc_simple_auctions');
+                $timetext = __('Time left', 'wc_auction_software');
                 $datatime = $product->get_seconds_remaining();
                 $product_id = $product->get_id();
                 if(!$product->is_started()) {
-                    $timetext = __('Starting in', 'wc_simple_auctions');
+                    $timetext = __('Starting in', 'wc_auction_software');
                     $datatime = $product->get_seconds_to_auction();
                 }
                 if($hide_time != 1 && !$product->is_closed()) {
@@ -134,7 +134,7 @@ class WC_SA_Widget_Future_Auctions extends WP_Widget
 					<div class="auction-time-countdown" data-time="'.$datatime.'" data-auctionid="'.$product_id.'" data-format="'.get_option('simple_auctions_countdown_format').'"></div>'; 
                 }
                 if($product->is_closed()) {
-                    $time = '<span class="has-finished">'.apply_filters('time_text', __('Auction finished', 'wc_simple_auctions'), $product_id).'</span>'; 
+                    $time = '<span class="has-finished">'.apply_filters('time_text', __('Auction finished', 'wc_auction_software'), $product_id).'</span>'; 
                 }
                 echo '<li>
 					<a href="' . get_permalink() . '">
@@ -207,14 +207,14 @@ class WC_SA_Widget_Future_Auctions extends WP_Widget
         }        
         $hide_time = empty( $instance['hide_time'] ) ? 0 : 1;
         ?>
-     <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'wc_simple_auctions'); ?></label>
+     <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'wc_auction_software'); ?></label>
      <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
 
-     <p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of auctions to show:', 'wc_simple_auctions'); ?></label>
+     <p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of auctions to show:', 'wc_auction_software'); ?></label>
      <input id="<?php echo esc_attr($this->get_field_id('number')); ?>" name="<?php echo esc_attr($this->get_field_name('number')); ?>" type="text" value="<?php echo esc_attr($number); ?>" size="3" /></p>
 		
      <p><input type="checkbox" class="checkbox" id="<?php echo esc_attr($this->get_field_id('hide_time')); ?>" name="<?php echo esc_attr($this->get_field_name('hide_time')); ?>"<?php checked($hide_time); ?> />
-     <label for="<?php echo $this->get_field_id('hide_time'); ?>"><?php _e('Hide time left', 'wc_simple_auctions'); ?></label></p>
+     <label for="<?php echo $this->get_field_id('hide_time'); ?>"><?php _e('Hide time left', 'wc_auction_software'); ?></label></p>
         <?php
     }
 }

@@ -48,16 +48,16 @@ class WC_Email_SA_Auction_Relist_User extends WC_Email
         global $woocommerce_auctions;
 
         $this->id                 = 'auction_relist_user';
-        $this->title             = __('Auction relist user notice', 'wc_simple_auctions');
-        $this->description        = __('Auction relist user emails are sent to wining user when auction is relisted.', 'wc_simple_auctions');
+        $this->title             = __('Auction relist user notice', 'wc_auction_software');
+        $this->description        = __('Auction relist user emails are sent to wining user when auction is relisted.', 'wc_auction_software');
 
         $this->template_html     = 'emails/auction_relist_user.php';
         $this->template_plain     = 'emails/plain/auction_relist_user.php';
         $this->template_base    = $woocommerce_auctions->plugin_path.  'templates/';
         
 
-        $this->subject             = __('Auction Relisted on {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('Auction Relist Notification', 'wc_simple_auctions');
+        $this->subject             = __('Auction Relisted on {blogname}', 'wc_auction_software');
+        $this->heading          = __('Auction Relist Notification', 'wc_auction_software');
         
                 
         $this->checkout_url     = simple_auction_get_checkout_url();

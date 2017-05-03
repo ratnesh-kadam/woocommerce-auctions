@@ -43,15 +43,15 @@ class WC_Email_SA_Auction_Reserve_Failed extends WC_Email
         global $woocommerce_auctions;
 
         $this->id                 = 'Reserve_fail';
-        $this->title             = __('Reserve Fail', 'wc_simple_auctions');
-        $this->description        = __('Reserve Fail emails are sent to user when the auction is finished but didn\'t make the reserve price', 'wc_simple_auctions');
+        $this->title             = __('Reserve Fail', 'wc_auction_software');
+        $this->description        = __('Reserve Fail emails are sent to user when the auction is finished but didn\'t make the reserve price', 'wc_auction_software');
 
         $this->template_html     = 'emails/reserve_fail.php';
         $this->template_plain     = 'emails/plain/reserve_fail.php';
         $this->template_base    = $woocommerce_auctions->plugin_path.  'templates/';
 
-        $this->subject             = __('Auction didn\'t succeed {blogname}', 'wc_simple_auctions');
-        $this->heading          = __('Auction didn\'t make it to the reserve price!', 'wc_simple_auctions');
+        $this->subject             = __('Auction didn\'t succeed {blogname}', 'wc_auction_software');
+        $this->heading          = __('Auction didn\'t make it to the reserve price!', 'wc_auction_software');
 
         // Triggers
         //die(); 

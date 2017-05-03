@@ -66,7 +66,7 @@ class WC_Product_Auction extends WC_Product
         }
 
 
-        $this->auction_item_condition_array = apply_filters('simple_auction_item_condition', array( 'new' => __('New', 'wc_simple_auctions'), 'used'=> __('Used', 'wc_simple_auctions') ));
+        $this->auction_item_condition_array = apply_filters('simple_auction_item_condition', array( 'new' => __('New', 'wc_auction_software'), 'used'=> __('Used', 'wc_auction_software') ));
 
         parent::__construct($product);
         $this->is_closed();
@@ -343,7 +343,7 @@ class WC_Product_Auction extends WC_Product
                     update_post_meta($id, '_auction_fail_reason', '1');
                     $order_id = false;
                     do_action('woocommerce_simple_auction_close',  $id);
-                    do_action('woocommerce_simple_auction_fail', array('auction_id' => $id , 'reason' => __('There was no bid', 'wc_simple_auctions') ));
+                    do_action('woocommerce_simple_auction_fail', array('auction_id' => $id , 'reason' => __('There was no bid', 'wc_auction_software') ));
                     return false;
                 }
                 if ($this->is_reserve_met() == false) {
@@ -352,7 +352,7 @@ class WC_Product_Auction extends WC_Product
                     $order_id = false;
                     do_action('woocommerce_simple_auction_close',  $id);
                     do_action('woocommerce_simple_auction_reserve_fail', array('user_id' => $this->get_auction_current_bider(),'product_id' => $id ));
-                    do_action('woocommerce_simple_auction_fail', array('auction_id' => $id , 'reason' => __('The item didn\'t make it to reserve price', 'wc_simple_auctions') ));
+                    do_action('woocommerce_simple_auction_fail', array('auction_id' => $id , 'reason' => __('The item didn\'t make it to reserve price', 'wc_auction_software') ));
                     return false;
                 }
                 update_post_meta($id, '_auction_closed', '2');
@@ -424,7 +424,7 @@ class WC_Product_Auction extends WC_Product
             $data .= "<td class='bid'>".wc_price($history_value->bid)."</td>";
             $data .= "<td class='username'>".get_userdata($history_value->userid)->display_name."</td>";
         if ($history_value->proxy == 1) {
-            $data .= " <td class='proxy'>".__('Auto', 'wc_simple_auctions')."</td>"; 
+            $data .= " <td class='proxy'>".__('Auto', 'wc_auction_software')."</td>"; 
         }
         else {
             $data .= " <td class='proxy'></td>"; 
@@ -447,33 +447,33 @@ class WC_Product_Auction extends WC_Product
 
         if ($this->is_closed() && $this->is_started() ) {
             if ($this->get_auction_closed() == '3') {
-                $price = __('<span class="sold-for auction">Sold for</span>: ', 'wc_simple_auctions').wc_price($this->get_price());
+                $price = __('<span class="sold-for auction">Sold for</span>: ', 'wc_auction_software').wc_price($this->get_price());
             }
             else{
                 if ($this->get_auction_current_bid()) {
                     if ($this->is_reserve_met() == false) {
-                        $price = __('<span class="winned-for auction">Auction item did not make it to reserve price</span> ', 'wc_simple_auctions');
+                        $price = __('<span class="winned-for auction">Auction item did not make it to reserve price</span> ', 'wc_auction_software');
                     } else{
-                        $price = __('<span class="winned-for auction">Winning Bid:</span> ', 'wc_simple_auctions').wc_price($this->get_auction_current_bid());
+                        $price = __('<span class="winned-for auction">Winning Bid:</span> ', 'wc_auction_software').wc_price($this->get_auction_current_bid());
                     }
                 }
                 else{
-                    $price = __('<span class="winned-for auction">Auction Ended</span> ', 'wc_simple_auctions');
+                    $price = __('<span class="winned-for auction">Auction Ended</span> ', 'wc_auction_software');
                 }
 
 
             }
 
         } elseif(!$this->is_started()) {
-            $price = '<span class="auction-price" data-auction-id="'.$id.'" data-bid="'.$this->get_auction_current_bid().'" data-status="future">'.__('<span class="starting auction">Starting bid:</span> ', 'wc_simple_auctions').wc_price($this->get_curent_bid()).'</span>';
+            $price = '<span class="auction-price" data-auction-id="'.$id.'" data-bid="'.$this->get_auction_current_bid().'" data-status="future">'.__('<span class="starting auction">Starting bid:</span> ', 'wc_auction_software').wc_price($this->get_curent_bid()).'</span>';
         } else {
             if($this->get_auction_sealed() == 'yes') {
-                $price = '<span class="auction-price" data-auction-id="'.$id.'"  data-status="running">'.__('<span class="current auction">This is sealed bid auction.</span> ', 'wc_simple_auctions').'</span>';
+                $price = '<span class="auction-price" data-auction-id="'.$id.'"  data-status="running">'.__('<span class="current auction">This is sealed bid auction.</span> ', 'wc_auction_software').'</span>';
             } else{
                 if (!$this->get_auction_current_bid()) {
-                    $price = '<span class="auction-price" data-auction-id="'.$id.'" data-bid="'.$this->get_auction_current_bid().'" data-status="running">'.__('<span class="current auction">Starting bid:</span> ', 'wc_simple_auctions').wc_price($this->get_curent_bid()).'</span>';
+                    $price = '<span class="auction-price" data-auction-id="'.$id.'" data-bid="'.$this->get_auction_current_bid().'" data-status="running">'.__('<span class="current auction">Starting bid:</span> ', 'wc_auction_software').wc_price($this->get_curent_bid()).'</span>';
                 } else {
-                    $price = '<span class="auction-price" data-auction-id="'.$id.'" data-bid="'.$this->get_auction_current_bid().'" data-status="running">'.__('<span class="current auction">Current bid:</span> ', 'wc_simple_auctions').wc_price($this->get_curent_bid()).'</span>';
+                    $price = '<span class="auction-price" data-auction-id="'.$id.'" data-bid="'.$this->get_auction_current_bid().'" data-status="running">'.__('<span class="current auction">Current bid:</span> ', 'wc_auction_software').wc_price($this->get_curent_bid()).'</span>';
                 }
             }
 
@@ -552,11 +552,11 @@ class WC_Product_Auction extends WC_Product
     public function add_to_cart_text() 
     {
         if (!$this->is_finished() && $this->is_started() ) {
-            $text = __('Bid now', 'wc_simple_auctions');
+            $text = __('Bid now', 'wc_auction_software');
         } elseif($this->is_finished()  ) {
-            $text = __('Auction finished', 'wc_simple_auctions');
+            $text = __('Auction finished', 'wc_auction_software');
         } elseif(!$this->is_finished() && !$this->is_started()  ) {
-            $text =  __('Auction not started', 'wc_simple_auctions');
+            $text =  __('Auction not started', 'wc_auction_software');
         }
 
         return apply_filters('woocommerce_product_add_to_cart_text', $text, $this);
